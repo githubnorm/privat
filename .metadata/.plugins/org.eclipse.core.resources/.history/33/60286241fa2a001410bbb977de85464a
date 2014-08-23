@@ -1,0 +1,36 @@
+<?php 
+	include "source/db_connection.php";
+	include "source/db_queries.php";
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>php db insert</title>
+<!--
+	<script language="JavaScript" src="test.js"></script>
+-->
+</head>
+
+<body>
+<div id="main" style="margin: 0px; padding: 10px; background-color: #FBFBFB;">
+php insert<br>
+
+<p>
+<?php 
+	$db_results = mysql_query($query_insert_test, $db_connection);
+	if($db_results) {
+		while ($row = mysql_fetch_array($db_results, MYSQL_NUM)) {
+			printf("$row[0], $row[1], $row[2], $row[3], $row[4]");
+			echo "<br>";
+		}
+	} else {
+		echo "Table not inserted";
+	}
+?>
+</p>
+</div>
+</body>
+</html>
+<?php 
+	mysql_close($db_connection);
+?>
