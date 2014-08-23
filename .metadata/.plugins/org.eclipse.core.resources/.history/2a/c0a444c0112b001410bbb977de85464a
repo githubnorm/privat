@@ -1,0 +1,33 @@
+<?php
+	
+	function get($key) {
+		if (isset($_GET[$key]))
+			return $_GET[$key];
+		return false;
+	}
+
+	// check if we can get hold of the form field
+	if ( !get('id') ) {
+		echo "parameter are not full filled"; exit;
+	}
+	
+	include "db_connection.php";
+	
+	// lets setup our insert query
+	$query_delete = "
+		INSERT INTO 
+		`companies`(`location`, `anfahrt`, `job_ids`, `ratings`) 
+		VALUES ('".get['id']."','".$val_anfahrt."','".$val_job_ids."','".$val_ratings."')";
+
+	// lets run our query
+	$result = mysql_query($query_insert, $db_connection);
+
+	// setup our response "object"
+	$resp = new stdClass();
+	$resp->success = false;
+	if($result) {
+		$resp->success = true;
+	}
+
+	print json_encode($resp);
+?>

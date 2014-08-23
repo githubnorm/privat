@@ -1,0 +1,7 @@
+<?php
+
+	$query_companies = "
+		SELECT * 
+		FROM `companies`"
+
+?>

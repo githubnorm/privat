@@ -1,1 +1,6 @@
-test
+Datenbankname :	db540710562
+Hostname :	db540710562.db.1and1.com
+Port :	3306
+Benutzername :	dbo540710562
+Beschreibung :	test
+Version :	MySQL5

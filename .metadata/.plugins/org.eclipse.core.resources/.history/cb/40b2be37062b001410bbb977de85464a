@@ -1,0 +1,48 @@
+<?php
+	include "source/db_connection.php";
+	
+	function post($key) {
+		if (isset($_POST[$key]))
+			return $_POST[$key];
+		return false;
+	}
+
+	// setup the database connect
+	$cxn = mysql_connect('localhost', 'root', '');
+	if (!$cxn) {
+		//echo "exit1";
+		exit;
+	}
+	
+	mysql_select_db('jobsearch_test', $cxn);
+	
+	// check if we can get hold of the form field
+	if (!post('location') || !post('anfahrt') || !post('job_ids') || !post('ratings')) {
+		//echo "exit2";
+		exit;
+	}
+
+	// let make sure we escape the data
+	$val_location = mysql_real_escape_string(post('location'), $cxn);
+	$val_anfahrt  = mysql_real_escape_string(post('anfahrt'), $cxn);
+	$val_job_ids  = mysql_real_escape_string(post('job_ids'), $cxn);
+	$val_ratings  = mysql_real_escape_string(post('ratings'), $cxn);
+
+	// lets setup our insert query
+		$query_insert = "
+			INSERT INTO 
+			`companies`(`location`, `anfahrt`, `job_ids`, `ratings`) 
+			VALUES ('".$val_location."','".$val_anfahrt."','".$val_job_ids."','".$val_ratings."')";
+
+	// lets run our query
+	$result = mysql_query($query_insert, $cxn);
+
+	// setup our response "object"
+	$resp = new stdClass();
+	$resp->success = false;
+	if($result) {
+		$resp->success = true;
+	}
+
+	print json_encode($resp);
+?>

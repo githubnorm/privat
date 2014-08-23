@@ -1,0 +1,12 @@
+<?php
+
+	$query_companies = "
+		SELECT * 
+		FROM `companies`"
+		
+	$query_insert_test = "
+		SELECT * 
+		FROM `companies`"
+		
+
+?>
