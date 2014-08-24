@@ -40,3 +40,6 @@ Thumbs.db
 ######################
 .metadata
 RemoteSystemsTempFiles
+.settings
+.buildpath
+.project
