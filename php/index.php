@@ -11,10 +11,10 @@
 	<div id="main" style="margin: 0px; padding: 10px; background-color: #FBFBFB;">
 		php testing:<br>
 		<p>
-			<form method="post" action="source/db_insert.php" onSubmit="return ajaxSubmit(this);">
-				Value: <input type="text" name="location" /> 
+			<form method="post" action="source/db_insert.php?i=company" onSubmit="return ajaxSubmit(this);">
+				Values: <input type="text" name="location" /> 
 				<input type="text" name="anfahrt" /> 
-				<input type="text" name="job_ids" /> 
+				<input type="text" name="jobs" /> 
 				<input type="text" name="ratings" /> 
 				<input type="submit" name="form_submit" value="Go" />
 			</form>
@@ -23,6 +23,17 @@
 			<span data-target="hot">
 				<!-- db data -->
 			</span>
+		</p>
+		<p>
+			<div id="div_add" style="display:none;">
+				<form id="form_add" method="post" action="source/db_insert.php?i=job" onSubmit="return ajaxSubmit(this);">
+					Values: <input type="text" name="position" /> 
+					<input type="text" name="link" /> 
+					<input id="company" type="hidden" name="company" value="-" /> 
+					<input type="submit" name="form_submit" value="Go" />
+				</form>
+				<span onclick='showAddForm(false)'>[close]</span>
+			</div>
 		</p>
 	</div>
 </body>

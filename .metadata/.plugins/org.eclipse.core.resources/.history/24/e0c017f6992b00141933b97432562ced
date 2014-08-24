@@ -1,0 +1,39 @@
+<?php
+	
+	
+	if (isset($_GET['i']))
+		$insert_modus = $_GET['i'];
+
+	// check if we can get hold of the form field
+	function post($key) {
+		if (isset($_POST[$key]) && !empty($_POST[$key]))
+			return $_POST[$key];
+		return "-";
+	}
+
+	include "db_connection.php";
+	
+	// let make sure we escape the data (für Umlaute)
+	$val_location = mysql_real_escape_string(post('location'), $db_connection);
+	$val_anfahrt  = mysql_real_escape_string(post('anfahrt'), $db_connection);
+	$val_jobs  = mysql_real_escape_string(post('jobs'), $db_connection);
+	$val_ratings  = mysql_real_escape_string(post('ratings'), $db_connection);
+
+	// lets setup our insert query
+	$query_insert = "
+		INSERT INTO 
+		`companies`(`location`, `anfahrt`, `jobs`, `ratings`) 
+		VALUES ('".$val_location."','".$val_anfahrt."','".post('jobs')."','".$val_ratings."')";
+
+	// lets run our query
+	$result = mysql_query($query_insert, $db_connection);
+
+	// setup our response "object"
+	$resp = new stdClass();
+	$resp->success = false;
+	if($result) {
+		$resp->success = true;
+	}
+
+	print json_encode($resp);
+?>

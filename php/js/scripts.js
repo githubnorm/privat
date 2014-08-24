@@ -18,6 +18,7 @@ var ajaxSubmit = function(formEl) {
 		}
 	}).fail(function() {
 		alert( "insert failed!" );
+		$("*").removeClass("busy");
 	})
 
 	// return false so the form does not actually
@@ -32,17 +33,26 @@ var loadData = function() {
 		cache: false
 	}).done(function(response) {
 		$("[data-target='hot']").html(response);
-		$("*").removeClass("busy");
 	}).fail(function() {
 		alert( "fetch failed!" );
-	})
+	}).always(function() {
+		$("*").removeClass("busy");
+	});
 	return false;
 }
 
-var deleteRow = function(id) {
+var deleteData = function(cid, jid) {
 	$("*").addClass("busy");
+	var delete_url = 'source/db_delete.php';
+	if(jid==0) {
+		delete_url = delete_url+'?company_id='+cid+'&all=true';
+	} else if(!!jid) {
+		delete_url = delete_url+'?company_id='+cid+'&job_id='+jid;
+	} else {
+		delete_url = delete_url+'?company_id='+cid;
+	}
 	$.ajax({
-		url: 'source/db_delete.php?company_id='+id,
+		url: delete_url,
 		dataType: 'json'
 	}).done(function(rsp) {
 		if(rsp.success) {
@@ -50,7 +60,18 @@ var deleteRow = function(id) {
 		}
 	}).fail(function() {
 		alert( "delete failed!" );
+		$("*").removeClass("busy");
 	})
+	return false;
+};
+
+var showAddForm = function(id) {
+	if(id) {
+		$('#company').val(id);
+		$('#div_add').show();
+	} else {
+		$('#div_add').hide();
+	}
 	return false;
 };
 

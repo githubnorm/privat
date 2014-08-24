@@ -1,0 +1,301 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894085450
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894403230
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408894405250
+error,log,,,"An exception has thrown while performing a search",1408894409450
+error,log,,,"An exception has thrown while performing a search",1408894409460
+error,log,,,"An exception has thrown while performing a search",1408894409470
+error,log,,,"An exception has thrown while performing a search",1408894409480
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408894409530
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894411200
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894417850
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894418550
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894448121
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408894458141
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408894459451
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408894464841
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894467601
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1408894487841
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408894489751
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894490941
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408894509741
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408894511211
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408894513211
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894514581
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894549591
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894553091
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894580931
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408894591951
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408894592951
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408894593981
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894596861
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894715632
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408894722252
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894826632
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894828072
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408894829362
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895098272
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408895103012
+error,log,,,"An exception has thrown while performing a search",1408895106852
+error,log,,,"An exception has thrown while performing a search",1408895106962
+executed,command,org.eclipse.wst.sse.ui,1.3.2.v201201041522,"org.eclipse.wst.sse.ui.toggle.comment",1408895107292
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408895108582
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895136792
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895145332
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895267033
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895440623
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895448083
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895468623
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408895472023
+error,log,,,"An exception has thrown while performing a search",1408895481873
+error,log,,,"An exception has thrown while performing a search",1408895481923
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408895481933
+error,log,,,"An exception has thrown while performing a search",1408895481993
+error,log,,,"An exception has thrown while performing a search",1408895482013
+error,log,,,"An exception has thrown while performing a search",1408895482033
+error,log,,,"An exception has thrown while performing a search",1408895482043
+error,log,,,"An exception has thrown while performing a search",1408895482043
+error,log,,,"An exception has thrown while performing a search",1408895482053
+error,log,,,"An exception has thrown while performing a search",1408895482063
+error,log,,,"An exception has thrown while performing a search",1408895482073
+error,log,,,"An exception has thrown while performing a search",1408895482083
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895484963
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895549003
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408895555383
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895560593
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895577263
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895578953
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895580063
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895583713
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895628133
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895659074
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895820730
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408895824860
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408895827320
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408895827840
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408895832310
+error,log,,,"An exception has thrown while performing a search",1408895836760
+error,log,,,"An exception has thrown while performing a search",1408895836790
+error,log,,,"An exception has thrown while performing a search",1408895836800
+error,log,,,"An exception has thrown while performing a search",1408895836810
+error,log,,,"An exception has thrown while performing a search",1408895836840
+error,log,,,"An exception has thrown while performing a search",1408895836860
+error,log,,,"An exception has thrown while performing a search",1408895836960
+error,log,,,"An exception has thrown while performing a search",1408895836990
+error,log,,,"An exception has thrown while performing a search",1408895837030
+executed,command,org.eclipse.wst.sse.ui,1.3.2.v201201041522,"org.eclipse.wst.sse.ui.toggle.comment",1408895837180
+error,log,,,"An exception has thrown while performing a search",1408895864461
+error,log,,,"An exception has thrown while performing a search",1408895864471
+error,log,,,"An exception has thrown while performing a search",1408895864471
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408895864561
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895874681
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895878861
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895887231
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408895888821
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408895898401
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408895905231
+error,log,,,"An exception has thrown while performing a search",1408895907591
+error,log,,,"An exception has thrown while performing a search",1408895907601
+error,log,,,"An exception has thrown while performing a search",1408895907611
+error,log,,,"An exception has thrown while performing a search",1408895907621
+error,log,,,"An exception has thrown while performing a search",1408895907631
+error,log,,,"An exception has thrown while performing a search",1408895907631
+error,log,,,"An exception has thrown while performing a search",1408895907671
+error,log,,,"An exception has thrown while performing a search",1408895907671
+error,log,,,"An exception has thrown while performing a search",1408895907681
+error,log,,,"An exception has thrown while performing a search",1408895907691
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408895907751
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408895910431
+error,log,,,"An exception has thrown while performing a search",1408895922101
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408895922101
+error,log,,,"An exception has thrown while performing a search",1408895922111
+error,log,,,"An exception has thrown while performing a search",1408895922121
+error,log,,,"An exception has thrown while performing a search",1408895922141
+error,log,,,"An exception has thrown while performing a search",1408895922141
+error,log,,,"An exception has thrown while performing a search",1408895922151
+error,log,,,"An exception has thrown while performing a search",1408895922161
+error,log,,,"An exception has thrown while performing a search",1408895922161
+error,log,,,"An exception has thrown while performing a search",1408895922171
+error,log,,,"An exception has thrown while performing a search",1408895922181
+error,log,,,"An exception has thrown while performing a search",1408895922191
+error,log,,,"An exception has thrown while performing a search",1408895922201
+error,log,,,"An exception has thrown while performing a search",1408895922211
+error,log,,,"An exception has thrown while performing a search",1408895922221
+error,log,,,"An exception has thrown while performing a search",1408895922231
+error,log,,,"An exception has thrown while performing a search",1408895922231
+error,log,,,"An exception has thrown while performing a search",1408895922241
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408895933551
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408895942361
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408895959691
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408895961911
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408895978311
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.goto.wordNext",1408896013531
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.goto.lineEnd",1408896014441
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408896026661
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408896055671
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408896084271
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1408896098271
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408896101811
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408896126611
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408896192481
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408896192671
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408896192851
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408896193101
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408896193351
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408896193681
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408896198071
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408896199021
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408896201801
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408896206211
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408896219351
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408896221291
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408896239331
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408896243031
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408896255291
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408896260221
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898354916
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408898358396
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898406326
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898416876
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898436586
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898521586
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898527036
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898531886
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898544756
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898550656
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408898552286
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898563146
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898566216
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898567866
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1408898581246
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898583386
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898588676
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898599926
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898607696
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408898612126
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898623966
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898648996
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898682816
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408898694996
+error,log,,,"An exception has thrown while performing a search",1408898735776
+error,log,,,"An exception has thrown while performing a search",1408898735776
+error,log,,,"An exception has thrown while performing a search",1408898735786
+error,log,,,"An exception has thrown while performing a search",1408898735796
+error,log,,,"An exception has thrown while performing a search",1408898735806
+error,log,,,"An exception has thrown while performing a search",1408898735816
+error,log,,,"An exception has thrown while performing a search",1408898735816
+error,log,,,"An exception has thrown while performing a search",1408898735826
+error,log,,,"An exception has thrown while performing a search",1408898735836
+error,log,,,"An exception has thrown while performing a search",1408898735846
+error,log,,,"An exception has thrown while performing a search",1408898735856
+error,log,,,"An exception has thrown while performing a search",1408898735856
+error,log,,,"An exception has thrown while performing a search",1408898735866
+error,log,,,"An exception has thrown while performing a search",1408898735876
+error,log,,,"An exception has thrown while performing a search",1408898735886
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898736206
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898740016
+error,log,,,"An exception has thrown while performing a search",1408898740066
+error,log,,,"An exception has thrown while performing a search",1408898740076
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898741856
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898743286
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898756116
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408898791766
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408898802416
+activated,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1408898805686
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898811996
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898835096
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898836186
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1408898858716
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898912456
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898915016
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898916377
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898917967
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898928247
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898932297
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898934467
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898968257
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898972137
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898973647
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408898977227
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408898979387
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898981377
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898985917
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408898987457
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408898989147
+error,log,,,"An exception has thrown while performing a search",1408899000447
+error,log,,,"An exception has thrown while performing a search",1408899000447
+error,log,,,"An exception has thrown while performing a search",1408899001297
+error,log,,,"An exception has thrown while performing a search",1408899001297
+error,log,,,"An exception has thrown while performing a search",1408899019537
+error,log,,,"An exception has thrown while performing a search",1408899019537
+error,log,,,"An exception has thrown while performing a search",1408899022077
+error,log,,,"An exception has thrown while performing a search",1408899022077
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899025707
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899029497
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408899033587
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899034857
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899049337
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408899103387
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408899116657
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899119547
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899135627
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899145577
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899147127
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899149417
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899156997
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899159137
+started,bundle,org.eclipse.compare,3.5.202.R37x_v20111109-0800,"org.eclipse.compare",1408899176528
+started,bundle,org.eclipse.dltk.validators.ui,3.0.0.v20110423,"org.eclipse.dltk.validators.ui",1408899176798
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899186528
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899196018
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408899201208
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899206478
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899222798
+activated,editor,org.eclipse.wst.jsdt.ui,1.1.102.v201201131900,"org.eclipse.wst.jsdt.ui.CompilationUnitEditor",1408899226198
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899232288
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899265748
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899269598
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899270498
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899271898
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899273168
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899274528
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408899276128
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899278048
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899289188
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899296378
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1408899305178
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408899318718
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408899385298
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1408899387638
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899393208
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899393578
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899398288
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899399268
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899399488
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899399668
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899399818
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineUp",1408899399958
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408899400468
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899450928
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899451858
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408899460948
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408899461318
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.moveLineDown",1408899461678
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1408899466118
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899478488
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899481508
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899493278
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1408899530458
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899531188
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899535938
+error,log,,,"An exception has thrown while performing a search",1408899536028
+error,log,,,"An exception has thrown while performing a search",1408899536038
+error,log,,,"An exception has thrown while performing a search",1408899536048
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1408899536898
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1408899541278
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1408899541648
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110928-1504,"org.eclipse.ui.edit.text.delete.line",1408899542018
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1408899569208
+activated,editor,org.eclipse.php.ui,3.0.1.v201201110400,"org.eclipse.php.editor",1408899580468
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1408899586698
+error,log,,,"An exception has thrown while performing a search",1408899586818

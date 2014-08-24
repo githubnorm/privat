@@ -1,0 +1,57 @@
+<?php
+	
+	// check if we can get hold of the form field
+	function post($key) {
+		if (isset($_POST[$key]) && !empty($_POST[$key]))
+			return $_POST[$key];
+		return "-";
+	}
+	
+	if (isset($_GET['i']))
+		$insert_modus = $_GET['i'];
+
+	include "db_connection.php";
+	
+	if($insert_modus=='company') {
+		
+		// let make sure we escape the data (für Umlaute)
+		$val_location = mysql_real_escape_string(post('location'), $db_connection);
+		$val_anfahrt  = mysql_real_escape_string(post('anfahrt'), $db_connection);
+		$val_jobs  = mysql_real_escape_string(post('jobs'), $db_connection);
+		$val_ratings  = mysql_real_escape_string(post('ratings'), $db_connection);
+	
+		// lets setup our insert query
+		$query_insert = "
+			INSERT INTO 
+			`companies`(`location`, `anfahrt`, `jobs`, `ratings`) 
+			VALUES ('".$val_location."','".$val_anfahrt."','".$val_jobs."','".$val_ratings."')";
+	
+	} elseif ($insert_modus=='job'){
+		
+		// let make sure we escape the data (für Umlaute)
+		$val_position = mysql_real_escape_string(post('position'), $db_connection);
+		$val_link  = mysql_real_escape_string(post('link'), $db_connection);
+		$val_company  = mysql_real_escape_string(post('company'), $db_connection);
+		
+		// lets setup our insert query
+		$query_insert = "
+			INSERT INTO
+			`jobs`(`position`, `link`, `company`)
+			VALUES ('".$val_position."','".$val_anfahrt."','".$val_company."')";
+		
+	} else {
+		echo "wrong insert type!"; exit;
+	}
+
+	// lets run our query
+	$result = mysql_query($query_insert, $db_connection);
+
+	// setup our response "object"
+	$resp = new stdClass();
+	$resp->success = false;
+	if($result) {
+		$resp->success = true;
+	}
+
+	print json_encode($resp);
+?>
