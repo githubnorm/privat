@@ -1,13 +1,16 @@
 <?php
 
-	$db = "test";
-	//$db = "live";
+	$db = "live";
+	
+	// set test configs if on localhost
+	if($_SERVER['SERVER_NAME']=='localhost')
+		$db = "local";
 		
 	/*test system*/
-	$host['test'] = "localhost";
-	$name['test'] = "root";
-	$pw['test'] = "";
-	$dbname['test'] = "jobsearch_test";
+	$host['local'] = "localhost";
+	$name['local'] = "root";
+	$pw['local'] = "";
+	$dbname['local'] = "jobsearch_test";
 	
 	/*live system*/
 	$host['live'] = "db540710562.db.1and1.com";

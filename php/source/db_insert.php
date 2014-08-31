@@ -11,45 +11,60 @@
 		$insert_modus = $_GET['i'];
 
 	if(!empty($insert_modus)) {
+		
+		/* connect db & load query libary */
 		include "db_connection.php";
+		include "db_queries.php";
+		
 		if($insert_modus=='company') {
 			
-			// let make sure we escape the data (für Umlaute)
-			$val_location = mysql_real_escape_string(post('location'), $db_connection);
-			$val_anfahrt  = mysql_real_escape_string(post('anfahrt'), $db_connection);
-			$val_jobs  = mysql_real_escape_string(post('jobs'), $db_connection);
-			$val_ratings  = mysql_real_escape_string(post('ratings'), $db_connection);
-		
-			// lets setup our insert query
-			$query_insert = "
-				INSERT INTO 
-				`companies`(`location`, `anfahrt`, `jobs`, `ratings`) 
-				VALUES ('".$val_location."','".$val_anfahrt."','".$val_jobs."','".$val_ratings."')";
+			// let make sure we escape the data (for german umlauts)
+			$val['country'] = mysql_real_escape_string(post('country'), $db_connection);
+			$val['city'] = mysql_real_escape_string(post('city'), $db_connection);
+			$val['com_name'] = mysql_real_escape_string(post('com_name'), $db_connection);
+			$val['com_link'] = mysql_real_escape_string(post('com_link'), $db_connection);
+			$val['infos'] = mysql_real_escape_string(post('infos'), $db_connection);
+			$val['loc_address'] = mysql_real_escape_string(post('loc_address'), $db_connection);
+			$val['loc_link'] = mysql_real_escape_string(post('loc_link'), $db_connection);
+			$val['loc_route'] = mysql_real_escape_string(post('loc_route'), $db_connection);
+			$val['ratings'] = mysql_real_escape_string(post('ratings'), $db_connection);
+			$val['notes'] = mysql_real_escape_string(post('notes'), $db_connection);
 			
-			$result = mysql_query($query_insert, $db_connection);
+			// `companies`(`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes`) ";
+			$query_tmp =  $query['generic_insert_company_with_values']."
+				VALUES ('".$val['country']."',
+						'".$val['city']."',
+						'".$val['com_name']."',
+						'".$val['com_link']."',
+						'".$val['infos']."',
+						'".$val['loc_address']."',
+						'".$val['loc_link']."',
+						'".$val['loc_route']."',
+						'".$val['ratings']."',
+						'".$val['notes']."')";
+			
+			// insert the company
+			$result = mysql_query($query_tmp, $db_connection);
 			
 		} elseif ($insert_modus=='job'){
 			
-			// let make sure we escape the data (für Umlaute)
-			$val_position = mysql_real_escape_string(post('position'), $db_connection);
-			$val_link  = mysql_real_escape_string(post('link'), $db_connection);
-			$val_company  = mysql_real_escape_string(post('company'), $db_connection);
+			// let make sure we escape the data (for german umlauts)
+			$val['company_id'] = mysql_real_escape_string(post('company_id'), $db_connection);
+			$val['position'] = mysql_real_escape_string(post('position'), $db_connection);
+			$val['link'] = mysql_real_escape_string(post('link'), $db_connection);
+			$val['notes'] = mysql_real_escape_string(post('notes'), $db_connection);
 			
-			// lets setup our insert query
-			$query_insert = "
-				INSERT INTO
-				`jobs`(`position`, `link`, `company`)
-				VALUES ('".$val_position."','".$val_link."','".$val_company."')";
+			// `jobs`(`company_id`,`position`,`link`,`notes`)";
+			$query_tmp = $query['generic_insert_job_with_values']."
+				VALUES ('".$val['company_id']."',
+						'".$val['position']."',
+						'".$val['link']."',
+						'".$val['notes']."')";
 			
-			
-			$query_update = "
-				UPDATE `companies` 
-				SET jobs = jobs + 1 
-				WHERE `company_id`=".$val_company;
-			
-			$result = mysql_query($query_insert, $db_connection);
-			if($result) {
-				$result = mysql_query($query_update, $db_connection);
+			// insert the job and update the company job counter
+			$result = false;
+			if(mysql_query($query_tmp, $db_connection)) {
+				$result = mysql_query( $query['generic_update_jobs_plus_from_company_id'] . $val['company_id'], $db_connection);
 			}
 			
 		} else {
@@ -59,15 +74,15 @@
 		echo "no insert type!"; exit;
 	}
 
-	// lets run our query
-
-
-	// setup our response "object"
+	/* close the db connection */
+	mysql_close($db_connection);
+	
+	// finally setup our response "object"
 	$resp = new stdClass();
 	$resp->success = false;
 	if($result) {
 		$resp->success = true;
 	}
-
 	print json_encode($resp);
+	
 ?>

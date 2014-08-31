@@ -5,6 +5,7 @@ var ajaxSubmit = function(formEl) {
 	// fetch the data for the form
 	var data = $(formEl).serializeArray();
 
+	$('#div_add').hide();
 	$("*").addClass("busy");
 	// setup the ajax request
 	$.ajax({
@@ -15,11 +16,14 @@ var ajaxSubmit = function(formEl) {
 	}).done(function(rsp) {
 		if(rsp.success) {
 			loadData();
+		} else {
+			alert( "something went wrong!" );
 		}
 	}).fail(function() {
 		alert( "insert failed!" );
+	}).always(function() {
 		$("*").removeClass("busy");
-	})
+	});
 
 	// return false so the form does not actually
 	// submit to the page
@@ -27,6 +31,7 @@ var ajaxSubmit = function(formEl) {
 }
 
 var loadData = function() {
+	$("*").addClass("busy");
 	$.ajax({
 		url: 'source/db_fetch.php',
 		dataType: 'html',
@@ -57,11 +62,14 @@ var deleteData = function(cid, jid) {
 	}).done(function(rsp) {
 		if(rsp.success) {
 			loadData();
+		} else {
+			alert( "something went wrong!" );
 		}
 	}).fail(function() {
 		alert( "delete failed!" );
+	}).always(function() {
 		$("*").removeClass("busy");
-	})
+	});
 	return false;
 };
 
