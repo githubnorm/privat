@@ -13,7 +13,7 @@
 	
 	$query['generic_select_all_jobs_with_company_id'] = "
 		SELECT `JOB_ID`
-		FROM `jobs`
+		FROM jobs
 		WHERE `company_id`="; // --> generic value, please see db_delete.php
 	
 	$query['generic_insert_company_with_values'] = "

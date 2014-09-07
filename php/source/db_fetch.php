@@ -27,17 +27,34 @@
 			 */
 			if($tempIndex!=$row[0]) {
 				printf("
-					[$row[0]] $row[1], $row[2], <a href=\"$row[4]\" target=\"_blank\">$row[3]</a>, $row[5], 
-					<a href=\"$row[7]\" target=\"_blank\">$row[6]</a>, $row[8], $row[9], 
-					(<a href=\"$row[11]\" target=\"_blank\">$row[10]</a>, [$row[12]])[<span onclick=\"deleteData($row[0],$row[13])\">X</span>], 
-					$row[6], 
-					[<span onclick=\"showAddForm($row[0])\">add</span>] | [<span onclick=\"deleteData($row[0],0)\">delete</span>]
+					<span>
+						[<span class=\"companyID\">$row[0]</span>] <span class=\"country\">$row[1]</span>, 
+							<span class=\"city\">$row[2]</span>, <span class=\"company\"><a href=\"$row[4]\" target=\"_blank\">$row[3]</a></span>, 
+							<span class=\"infos\">$row[5]</span>, 
+							<span class=\"address\"><a href=\"$row[7]\" target=\"_blank\">$row[6]</a></span>, 
+							<span class=\"route\">$row[8]</span>, <span class=\"ratings\">$row[9]</span>, 
+						<span>
+							(<a href=\"$row[11]\" target=\"_blank\">$row[10]</a>, [<span>$row[12]</span>]) 
+								[<span class=\"button\" onclick=\"showEditFormJob(this, $row[13], $row[0])\">E</span>] 
+								[<span class=\"button\" onclick=\"deleteData($row[0],$row[13])\">X</span>] 
+						</span>, 
+						<span class=\"notes\">$row[14]</span> 
+						[<span class=\"button\" onclick=\"showAddForm($row[0])\">add</span>] | 
+							[<span class=\"button\" onclick=\"showEditFormCompany(this, $row[0])\">edit</span>] | 
+							[<span class=\"button\" onclick=\"deleteData($row[0],0)\">delete</span>]
+					</span>
 				");
 			} else {
 				printf("
-					-, -, -, -, -, -, -, -, 
-					(<a href=\"$row[11]\" target=\"_blank\">$row[10]</a>, [$row[12]])[<span onclick=\"deleteData($row[0],$row[13])\">X</span>], 
-					-,
+					<span>
+						-, -, -, -, -, -, -, -, 
+						<span>
+						(<a href=\"$row[11]\" target=\"_blank\">$row[10]</a>, [<span>$row[12]</span>]) 
+							[<span class=\"button\" onclick=\"showEditFormJob(this, $row[13], $row[0])\">E</span>] 
+							[<span class=\"button\" onclick=\"deleteData($row[0],$row[13])\">X</span>]
+						</span>, 
+						-,
+					</span>
 				");
 			}
 			echo "<br>";
@@ -65,11 +82,21 @@
 			 * $row[10]=`notes`,
 			 */
 			printf("
-				[$row[0]] $row[1], $row[2], <a href=\"$row[4]\" target=\"_blank\">$row[3]</a>, $row[5], 
-				<a href=\"$row[7]\" target=\"_blank\">$row[6]</a>, $row[8], $row[9], 
-				-, -, 
-				$row[10], 
-				[<span onclick=\"showAddForm($row[0])\">add</span>] | [<span onclick=\"deleteData($row[0])\">delete</span>]");
+				<span>
+					[<span class=\"companyID\">$row[0]</span>] <span class=\"country\">$row[1]</span>, 
+						<span class=\"city\">$row[2]</span>, <span class=\"company\"><a href=\"$row[4]\" target=\"_blank\">$row[3]</a></span>, 
+						<span class=\"infos\">$row[5]</span>, 
+						<span class=\"address\"><a href=\"$row[7]\" target=\"_blank\">$row[6]</a></span>, 
+						<span class=\"route\">$row[8]</span>, <span class=\"ratings\">$row[9]</span>, 
+					<span>
+						-, - 
+					</span>, 
+					<span class=\"notes\">$row[10]</span> 
+					[<span class=\"button\" onclick=\"showAddForm($row[0])\">add</span>] | 
+						[<span class=\"button\" onclick=\"showEditFormCompany(this, $row[0])\">edit</span>] | 
+						[<span class=\"button\" onclick=\"deleteData($row[0])\">delete</span>]
+				</span>
+			");
 			echo "<br>";
 		}
 	} else {

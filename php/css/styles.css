@@ -2,3 +2,6 @@
 .busy {
 	cursor: wait !important;
 }
+.button {
+	cursor: pointer !important;
+}

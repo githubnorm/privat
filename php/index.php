@@ -9,7 +9,7 @@
 	<title>php testing <?php echo "[$db]" ?></title>
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<!-- TODO: kein externen jquery link -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/scripts.js"></script>
 </head>
 <body>
@@ -17,7 +17,6 @@
 		php testing <?php echo "[$db]" ?>:<br>
 		<p>
 			<form method="post" action="source/db_insert.php?i=company" onSubmit="return ajaxSubmit(this);">
-				Values: 
 				<input type="text" name="country" value="country" /> 
 				<input type="text" name="city" value="city" /> 
 				<input type="text" name="com_name" value="name" /> 
@@ -28,7 +27,7 @@
 				<input type="text" name="loc_route" value="route" /> 
 				<input type="text" name="ratings" value="ratings" /> 
 				<input type="text" name="notes" value="notes" /> 
-				<input type="submit" name="form_submit" value="Go" />
+				<input type="submit" name="form_submit" value="Add" />
 			</form>
 		</p>
 		<p>
@@ -36,17 +35,49 @@
 				<!-- db data -->
 			</span>
 		</p>
+		<!-- TODO: unifying of job edit layers -->
 		<p>
-			<div id="div_add" style="display:none;">
-				<form id="form_add" method="post" action="source/db_insert.php?i=job" onSubmit="return ajaxSubmit(this);">
-					Values: 
-					<input id="company" type="hidden" name="company_id" value="-" /> 
+			<div id="divAddJob" style="display:none;">
+				<form id="formAddJob" method="post" action="source/db_insert.php?i=job" onSubmit="return ajaxSubmit(this);">
+					<input id="company" type="hidden" name="companyID" value="-" /> 
 					<input type="text" name="position" value="position" /> 
 					<input type="text" name="link" value="link" /> 
 					<input type="text" name="notes" value="notes" /> 
-					<input type="submit" name="form_submit" value="Go" />
+					<input type="submit" name="form_submit" value="Add" />
 				</form>
-				<span onclick='showAddForm(false)'>[close]</span>
+				<span onclick='showAddForm()'>[close]</span>
+			</div>
+		</p>
+		<p>
+			<div id="divEditJob" style="display:none;">
+				<form id="formEditJob" method="post" action="source/db_update.php?i=job" onSubmit="return ajaxSubmit(this);">
+<!-- 					<input type="hidden" name="companyID" value="-" />  -->
+					<input type="hidden" name="jobID" value="-" /> 
+					<input type="text" name="position" value="" /> 
+					<input type="text" name="link" value="" /> 
+					<input type="text" name="notes" value="" /> 
+					<input type="submit" name="form_submit" value="Edit" />
+				</form>
+				<span onclick='showEditFormJob()'>[close]</span>
+			</div>
+		</p>
+		<p>
+			<div id="divEditCompany" style="display:none;">
+				<form id="formEditCompany" method="post" action="source/db_update.php?i=company" onSubmit="return ajaxSubmit(this);">
+					<input type="hidden" name="companyID" value="-" /> 
+					<input type="text" name="country" value="" /> 
+					<input type="text" name="city" value="" /> 
+					<input type="text" name="com_name" value="" /> 
+					<input type="text" name="com_link" value="" /> 
+					<input type="text" name="infos" value="" /> 
+					<input type="text" name="loc_address" value="" /> 
+					<input type="text" name="loc_link" value="" /> 
+					<input type="text" name="loc_route" value="" /> 
+					<input type="text" name="ratings" value="" /> 
+					<input type="text" name="notes" value="" /> 
+					<input type="submit" name="form_submit" value="Edit" />
+				</form>
+				<span onclick='showEditFormCompany()'>[close]</span>
 			</div>
 		</p>
 	</div>
