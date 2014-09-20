@@ -1,9 +1,5 @@
 <?php 
 
-	/* connect db & load query libary */
-	include "db_connection.php";
-	include "db_queries.php";
-
 	$query_tmp  = mysql_query($query['static_select_companies_with_jobs'], $db_connection);
 	
 	if($query_tmp) {
@@ -35,12 +31,12 @@
 							<span class=\"route\">$row[8]</span>, <span class=\"ratings\">$row[9]</span>, 
 						<span>
 							(<a href=\"$row[11]\" target=\"_blank\">$row[10]</a>, [<span>$row[12]</span>]) 
-								[<span class=\"button\" onclick=\"showEditFormJob(this, $row[13], $row[0])\">E</span>] 
+								[<span class=\"button\" onclick=\"editJData($row[13],this)\">E</span>] 
 								[<span class=\"button\" onclick=\"deleteData($row[0],$row[13])\">X</span>] 
 						</span>, 
 						<span class=\"notes\">$row[14]</span> 
-						[<span class=\"button\" onclick=\"showAddForm($row[0])\">add</span>] | 
-							[<span class=\"button\" onclick=\"showEditFormCompany(this, $row[0])\">edit</span>] | 
+						[<span class=\"button\" onclick=\"addJData($row[0],this)\">add</span>] | 
+							[<span class=\"button\" onclick=\"editCData($row[0],this)\">edit</span>] | 
 							[<span class=\"button\" onclick=\"deleteData($row[0],0)\">delete</span>]
 					</span>
 				");
@@ -50,7 +46,7 @@
 						-, -, -, -, -, -, -, -, 
 						<span>
 						(<a href=\"$row[11]\" target=\"_blank\">$row[10]</a>, [<span>$row[12]</span>]) 
-							[<span class=\"button\" onclick=\"showEditFormJob(this, $row[13], $row[0])\">E</span>] 
+							[<span class=\"button\" onclick=\"editJData($row[13],this)\">E</span>] 
 							[<span class=\"button\" onclick=\"deleteData($row[0],$row[13])\">X</span>]
 						</span>, 
 						-,
@@ -92,8 +88,8 @@
 						-, - 
 					</span>, 
 					<span class=\"notes\">$row[10]</span> 
-					[<span class=\"button\" onclick=\"showAddForm($row[0])\">add</span>] | 
-						[<span class=\"button\" onclick=\"showEditFormCompany(this, $row[0])\">edit</span>] | 
+					[<span class=\"button\" onclick=\"addJData($row[0],this)\">add</span>] | 
+						[<span class=\"button\" onclick=\"editCData($row[0],this)\">edit</span>] | 
 						[<span class=\"button\" onclick=\"deleteData($row[0])\">delete</span>]
 				</span>
 			");
@@ -103,8 +99,5 @@
 		echo "Query failed!";
 		echo "<br>";
 	}
-	
-	/* finally close the db connection */
-	mysql_close($db_connection);
 	
 ?>

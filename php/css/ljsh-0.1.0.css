@@ -1,0 +1,33 @@
+.background {
+	background-color: #b0c4de;
+}
+.basicLayerHeader {
+	padding: 8px; 
+	background-color: #2288EE;
+	text-align:center;
+}
+.basicLayerForm {
+	margin: 10px; 
+	padding: 10px; 
+	background-color: #FBFBFB;
+/* 	height:150px; */
+}
+.basicLayerList {
+	margin: 10px; 
+	padding: 10px; 
+	background-color: #FBFBFB;
+}
+.formInputElements {
+	float: left; 
+	display: inline;
+}
+.formButtonElements {
+	float: left; 
+	display: inline;
+}
+.busy {
+	cursor: wait !important;
+}
+.button {
+	cursor: pointer !important;
+}

@@ -1,20 +1,7 @@
 <?php
 	
-	/*
-	 * function checks the GET parameter in URL
-	 */ 
-	function get($key) {
-		if (isset($_GET[$key]))
-			return $_GET[$key];
-		return false;
-	}
-
 	// check if we can get hold of the form field
 	if ( get('company_id') ) {
-		
-		/* connect db & load query libary */
-		include "db_connection.php";
-		include "db_queries.php";
 		
 		// decide whether deleting a company related jobs or just a job from a company
 		if ( !get('job_id') ) {
@@ -42,9 +29,10 @@
 			
 		} else {
 			
-			// delete the job and update the company job counter
+			// delete the job ..
 			$result = false;
 			if(mysql_query( $query['generic_delete_job_by_id'] . get('job_id'), $db_connection)) {
+				// .. and update the company job counter
 				$result = mysql_query( $query['generic_update_jobs_minus_from_company_id'] . get('company_id'), $db_connection);
 			}
 			
@@ -53,15 +41,6 @@
 		echo "parameter are not full filled"; exit;
 	}
 	
-	/* close the db connection */
-	mysql_close($db_connection);
-	
-	// finally setup our response "object"
-	$resp = new stdClass();
-	$resp->success = false;
-	if($result) {
-		$resp->success = true;
-	}
-	print json_encode($resp);
+	toJSON($result);
 	
 ?>
