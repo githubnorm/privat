@@ -20,7 +20,7 @@
 			if( getPost('formAction')=="cAdd" ) {
 				
 				// `companies`(`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes`) ";
-				$query_tmp =  $query['generic_insert_company_with_values']."
+				$query_tmp =  $query['insert_company_with_values']."
 					VALUES ('".$val['country']."',
 					'".$val['city']."',
 					'".$val['com_name']."',
@@ -72,7 +72,7 @@
 				// let make sure we escape the data (for german umlauts)
 				$val['COMPANY_ID'] = mysql_real_escape_string(getPost('companyID'), $db_connection);
 				// `jobs`(`company_id`,`position`,`link`,`notes`)";
-				$query_tmp = $query['generic_insert_job_with_values']."
+				$query_tmp = $query['insert_job_with_values']."
 					VALUES ('".$val['COMPANY_ID']."',
 					'".$val['position']."',
 					'".$val['link']."',
@@ -82,7 +82,7 @@
 				// insert the job ..
 				if(mysql_query($query_tmp, $db_connection)) {
 					// .. and update the company job counter
-					$result = mysql_query( $query['generic_update_jobs_plus_from_company_id'] . $val['COMPANY_ID'], $db_connection);
+					$result = mysql_query( $query['update_jobs_plus_from_company_id'] . $val['COMPANY_ID'], $db_connection);
 				}
 			}
 			// update of job

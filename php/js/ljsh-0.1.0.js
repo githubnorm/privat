@@ -1,13 +1,13 @@
 /* 
- * private util functions
+ * util functions
  * **********************
  */
 var showLoader = function() {
-	$('#list').hide();
+	$('#hotList').hide();
 	$('#loader').show();
 }
 var showList = function() {
-	$('#list').show();
+	$('#hotList').show();
 	$('#loader').hide();
 }
 var showCompanyForm = function(bText) {
@@ -24,11 +24,11 @@ var showJobForm = function(bText) {
 var switchButtonText = function(txt) {
 	$('#formSubmit').text(txt);
 }
+
 /*
- * public functions
+ * main functions
  * ****************
  */
-
 var loadData = function() {
 	showLoader();
 	$.ajax({
@@ -36,7 +36,7 @@ var loadData = function() {
 		dataType: 'html',
 		cache: false
 	}).done(function(response) {
-		$("[data-target='hot']").html(response);
+		$("#hotList").html(response);
 	}).fail(function() {
 		alert( "fetch failed!" );
 	}).always(function() {
@@ -110,8 +110,8 @@ var deleteData = function(cid, jid) {
 	return false;
 };
 
-var addJData = function(cid, el) {
-	if(!!cid && !!el) {
+var addJData = function(cid) {
+	if(!!cid) {
 		resetForm();
 		form.find("[name='formAction']").val('jAdd');
 		form.find("[name='companyID']").val(cid);
@@ -123,12 +123,12 @@ var addJData = function(cid, el) {
 var editJData = function(jid, el) {
 	if(!!jid && !!el) {
 		resetForm();
-		var form = $('#theForm'), parentEL = $(el).parent();
+		var form = $('#theForm'), parentEL = $(el).closest(".jobRow");
 		form.find("[name='formAction']").val('jEdit');
 		form.find("[name='jobID']").val(jid);
-		form.find("[name='jposition']").val(parentEL.find('a').text());
+		form.find("[name='jposition']").val(parentEL.find('.cellPosition').text());
 		form.find("[name='jlink']").val(parentEL.find('a').attr('href'));
-		form.find("[name='jnotes']").val(parentEL.find('span').first().text());
+		form.find("[name='jnotes']").val(parentEL.find('.cellJobNotes').text());
 		showJobForm('Edit Job');
 	}
 	return false;
@@ -136,20 +136,20 @@ var editJData = function(jid, el) {
 
 var editCData = function(cid, el) {
 	if(!!cid && !!el) {
-		var form = $('#theForm'), parentEL = $(el).parent();
+		var form = $('#theForm'), parentEL = $(el).closest(".listLayer");
 		showCompanyForm('Edit Company');
 		form.find("[name='formAction']").val('cEdit');
 		form.find("[name='companyID']").val(cid);
-		form.find("[name='country']").val(parentEL.children(".country").text());
-		form.find("[name='city']").val(parentEL.children(".city").text());
-		form.find("[name='cname']").val(parentEL.children(".company").find('a').text());
-		form.find("[name='clink']").val(parentEL.children(".company").find('a').attr('href'));
-		form.find("[name='cinfos']").val(parentEL.children(".infos").text());
-		form.find("[name='caddress']").val(parentEL.children(".address").find('a').text());
-		form.find("[name='caddress_link']").val(parentEL.children(".address").find('a').attr('href'));
-		form.find("[name='croute']").val(parentEL.children(".route").text());
-		form.find("[name='cratings']").val(parentEL.children(".ratings").text());
-		form.find("[name='cnotes']").val(parentEL.children(".notes").text());
+		form.find("[name='country']").val(parentEL.find(".cellCounty").text());
+		form.find("[name='city']").val(parentEL.find(".cellCity").text());
+		form.find("[name='cname']").val(parentEL.find(".cellCompany").text());
+		form.find("[name='clink']").val(parentEL.find(".cellCompanyLink").attr('href'));
+		form.find("[name='cinfos']").val(parentEL.find(".cellInfos").text());
+		form.find("[name='caddress']").val(parentEL.find(".cellAddress").text());
+		form.find("[name='caddress_link']").val(parentEL.find(".cellAddressLink").attr('href'));
+		form.find("[name='croute']").val(parentEL.find(".cellRoute").text());
+		form.find("[name='cratings']").val(parentEL.find(".cellRatings").text());
+		form.find("[name='cnotes']").val(parentEL.find(".cellNotes").text());
 	}
 	return false;
 };
@@ -158,8 +158,7 @@ var editCData = function(cid, el) {
  * onload functions
  * ****************
  */
-
-//$( document ).ready(function() {
-//	resetForm();
-//	loadData();
-//});
+$( document ).ready(function() {
+	resetForm();
+	loadData();
+});

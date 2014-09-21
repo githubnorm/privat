@@ -1,33 +1,80 @@
 .background {
 	background-color: #b0c4de;
 }
-.basicLayerHeader {
+p.clear {
+	clear: both;
+} 
+/*
+ * ******* LAYERS *******
+ */
+.basicLayerHead {
 	padding: 8px; 
 	background-color: #2288EE;
 	text-align:center;
 }
-.basicLayerForm {
-	margin: 10px; 
-	padding: 10px; 
-	background-color: #FBFBFB;
-/* 	height:150px; */
-}
-.basicLayerList {
+.basicLayer {
 	margin: 10px; 
 	padding: 10px; 
 	background-color: #FBFBFB;
 }
-.formInputElements {
-	float: left; 
-	display: inline;
+.contentLayer {
+	margin:10px;
+	padding: 10px;
+	background: none repeat scroll 0 0 #eee;
 }
-.formButtonElements {
-	float: left; 
-	display: inline;
+.listLayer {
+	background: none repeat scroll 0 0 #ddd;
+	border-top: 1px solid #aaa;
+	margin: 4px 0;
 }
-.busy {
-	cursor: wait !important;
+.contentCellLayer {
+	background: none repeat scroll 0 0 #bbb;
+	float: left;
+	margin: 2px;
+	padding: 1px;
+}
+.cellHover:hover {
+	background: none repeat scroll 0 0 #ababab;
+}
+/*
+ * ******* CELLS *******
+ */
+.contentCellBasic {
+	float:left; 
+	display: inline; 
+	padding: 4px; 
+	margin: 2px; 
+	background: none repeat scroll 0 0 #ccc;
+}
+.cellCounty, .cellJobNotes {
+	font-size: 10px;
+}
+.cellCompany, .cellAddress, .cellCity, .cellPosition {
+	font-size: 12px;
+}
+.cellInfos, .cellRoute, .cellNotes {
+	font-size: 11px;
+}
+.cellRatings {
+	font-size: 11px;
+}
+/*
+ * ******* BUTTONS *******
+ */
+.buttonImgJob {
+	width: 14px;
+	margin:1px;
+	padding:1px;
+}
+.buttonImgCompany {
+	width: 20px; 
+	margin:2px; 
+	padding:1px;
 }
 .button {
+	cursor: pointer !important;
+	float: left; 
+}
+.pointer {
 	cursor: pointer !important;
 }
