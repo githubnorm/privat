@@ -12,12 +12,13 @@ p.clear {
 	background-color: #2288EE;
 	text-align:center;
 }
-.basicLayer {
+div.basicLayer {
 	margin: 10px; 
 	padding: 10px; 
-	background-color: #FBFBFB;
+	background-color: rgba(251,251,251,0.4);
+	filter: alpha(opacity=40); /* For IE8 and earlier */
 }
-.contentLayer {
+div.contentLayer {
 	margin:10px;
 	padding: 10px;
 	background: none repeat scroll 0 0 #eee;

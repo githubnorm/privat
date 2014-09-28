@@ -15,12 +15,13 @@
 			$val['loc_route'] = mysql_real_escape_string(getPost('croute'), $db_connection);
 			$val['ratings'] = mysql_real_escape_string(getPost('cratings'), $db_connection);
 			$val['notes'] = mysql_real_escape_string(getPost('cnotes'), $db_connection);
+			$val['ltype'] = mysql_real_escape_string(getPost('ltype'), $db_connection);
 			
 			// insertion of new company
 			if( getPost('formAction')=="cAdd" ) {
 				
-				// `companies`(`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes`) ";
-				$query_tmp =  $query['insert_company_with_values']."
+				// `companies`(`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes`,`ltype`) ";
+				$query_tmp =  $query['insert_company_values']."
 					VALUES ('".$val['country']."',
 					'".$val['city']."',
 					'".$val['com_name']."',
@@ -30,7 +31,9 @@
 					'".$val['loc_link']."',
 					'".$val['loc_route']."',
 					'".$val['ratings']."',
-					'".$val['notes']."')";
+					'".$val['notes']."',
+					'".$val['ltype']."')";
+				
 			}
 			
 			// update of company
@@ -72,7 +75,7 @@
 				// let make sure we escape the data (for german umlauts)
 				$val['COMPANY_ID'] = mysql_real_escape_string(getPost('companyID'), $db_connection);
 				// `jobs`(`company_id`,`position`,`link`,`notes`)";
-				$query_tmp = $query['insert_job_with_values']."
+				$query_tmp = $query['insert_job_values']."
 					VALUES ('".$val['COMPANY_ID']."',
 					'".$val['position']."',
 					'".$val['link']."',
@@ -82,7 +85,7 @@
 				// insert the job ..
 				if(mysql_query($query_tmp, $db_connection)) {
 					// .. and update the company job counter
-					$result = mysql_query( $query['update_jobs_plus_from_company_id'] . $val['COMPANY_ID'], $db_connection);
+					$result = mysql_query( $query['update_jobs_plus_where_company_id'] . $val['COMPANY_ID'], $db_connection);
 				}
 			}
 			// update of job

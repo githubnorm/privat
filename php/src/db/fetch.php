@@ -1,8 +1,11 @@
 <?php 
 
-	$query_companies  = mysql_query($query['select_all_companies'], $db_connection);
+if( $list = get('l') ) {
+
+	$query_companies = mysql_query($query['select_companies_where_list'] . "'$list'", $db_connection);
 	
 	if($query_companies) {
+		
 		while ($row = mysql_fetch_array($query_companies, MYSQL_NUM)) {
 			/* $row[0]=`COMPANY_ID`,
 			 * $row[1]=`country`,
@@ -16,6 +19,7 @@
 			 * $row[9]=`ratings`,
 			 * $row[10]=`jobs`,
 			 * $row[11]=`notes`,
+			 * $row[12]=`list`,
 			 */
 			echo "
 				<div class=\"listLayer\">
@@ -59,7 +63,7 @@
 			echo "<div class=\"contentCellBasic\" style=\"width: 35%;\">";
 				if($row[10]>0) {
 					// get all jobs with the from the current company
-					$query_jobs = mysql_query($query['select_all_jobs_with_company_id'] . $row[0], $db_connection);
+					$query_jobs = mysql_query($query['select_all_jobs_where_company_id'] . $row[0], $db_connection);
 					if($query_jobs) {
 						while ($jobRow = mysql_fetch_array($query_jobs, MYSQL_NUM)) {
 							/* $jobRow[0]=`JOB_ID`
@@ -112,12 +116,16 @@
 					<p style=\"clear: both;\">
 				</div>
 			";
-			
 		}
 		
 	} else {
 		echo "[ERROR] Query failed!";
 		echo "<br>";
 	}
-	
+
+} else {
+	echo "[ERROR] Query failed!";
+	echo "<br>";
+}
+
 ?>

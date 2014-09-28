@@ -1,6 +1,6 @@
 <?php 
 
-	$query_tmp  = mysql_query($query['select_companies_with_jobs'], $db_connection);
+	$query_tmp  = mysql_query($query['select_companies_where_jobs'], $db_connection);
 	
 	if($query_tmp) {
 		$tempIndex = "";
@@ -61,7 +61,7 @@
 		echo "<br>";
 	}
 	
-	$query_tmp = mysql_query($query['select_companies_with_no_jobs'], $db_connection);
+	$query_tmp = mysql_query($query['select_companies_where_no_jobs'], $db_connection);
 	
 	if($query_tmp) {
 		while ($row = mysql_fetch_array($query_tmp, MYSQL_NUM)) {

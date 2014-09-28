@@ -32,6 +32,7 @@
 			<input id="formAction" type="hidden" name="formAction" value="cAdd" />
 			<input id="companyID" type="hidden" name="companyID" value="" />
 			<input id="jobID" type="hidden" name="jobID" value="" />
+			<input id="ltype" type="hidden" name="ltype" value="hList" />
 			<div class="contentLayer">
 				<fieldset id="companyFields">
 					<div class="pure-g">
@@ -222,14 +223,22 @@
 	
 	<div class="basicLayer">
 		<div class="contentLayer">
-			<div id="hotList">
-				<!-- db data -->
+			<div style="display: block;">
+				<div data-list="hList" class="button" style="width: 33%; text-align: center;">HOT LIST</div>
+				<div data-list="iList" class="button" style="width: 33%; text-align: center;">INTERESTING LIST</div>
+				<div data-list="bList" class="button" style="width: 33%; text-align: center;">BLACK LIST</div>
 			</div>
-			<div id="interestList"style="display:none">
-				<!-- db data -->
-			</div>
-			<div id="blackList"style="display:none">
-				<!-- db data -->
+			<p style="clear: both;">
+			<div id="lists">
+				<div data-target="hList">
+					<!-- db data -->
+				</div>
+				<div data-target="iList" style="display:none;">
+					<!-- db data -->
+				</div>
+				<div data-target="bList" style="display:none;">
+					<!-- db data -->
+				</div>
 			</div>
 			<div id="loader" style="display:none;text-align:center;background:#fff;">
 				<img src="img/loader.gif" />

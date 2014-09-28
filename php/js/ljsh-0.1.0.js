@@ -1,15 +1,22 @@
 /* 
  * util functions
- * **********************
+ * **************
  */
+
+/* loading */
+var hideLists = function() {
+	$("[data-target]").hide();
+	return false;
+}
 var showLoader = function() {
-	$('#hotList').hide();
+	hideLists();
 	$('#loader').show();
 }
-var showList = function() {
-	$('#hotList').show();
+var showList = function(list) {
 	$('#loader').hide();
+	$("[data-target='"+list+"']").show();
 }
+/* form switching */
 var showCompanyForm = function(bText) {
 	$('#jobFields').hide();
 	$('#companyFields').show();
@@ -20,37 +27,49 @@ var showJobForm = function(bText) {
 	$('#companyFields').hide();
 	switchButtonText(bText);
 }
-
 var switchButtonText = function(txt) {
 	$('#formSubmit').text(txt);
+}
+var getList = function() {
+	return $('#theForm').find("[name='ltype']").val();
 }
 
 /*
  * main functions
- * ****************
+ * **************
  */
-var loadData = function() {
+
+var initListTabs = function() {
+	$("[data-list]").click(function(){
+		loadList($(this).attr('data-list'));
+	});
+	return false;
+}
+
+var loadList = function(list) {
 	showLoader();
+	$('#theForm').find("[name='ltype']").val(list);
 	$.ajax({
-		url: 'src/ljshFunc.php?a=f',
+		url: 'src/ljshFunc.php?a=f&l='+list,
 		dataType: 'html',
 		cache: false
 	}).done(function(response) {
-		$("#hotList").html(response);
+		$("[data-target='"+list+"']").html(response);
 	}).fail(function() {
 		alert( "fetch failed!" );
 	}).always(function() {
-		showList();
+		showList(list);
 	});
 	return false;
 }
 
 var ajaxSubmit = function(formEl) {
 	showLoader();
+	var form = $(formEl);
+	var url  = form.attr('action'); // fetch where we want to submit the form to
+	var data = form.serializeArray(); // fetch the data for the form
+	var list = form.find("[name='ltype']").val();
 	
-	var url = $(formEl).attr('action'); // fetch where we want to submit the form to
-	var data = $(formEl).serializeArray(); // fetch the data for the form
-
 	// setup the ajax request
 	$.ajax({
 		url: url,
@@ -59,23 +78,23 @@ var ajaxSubmit = function(formEl) {
 		dataType: 'json'
 	}).done(function(rsp) {
 		if(rsp.success) {
-			loadData();
+			loadList(list);
 		} else {
 			alert( "something went wrong!" );
-			showList();
+			showList(list);
 		}
 	}).fail(function() {
 		alert( "db operation failed!" );
-		showList();
+		showList(list);
 	});
-
+	
 	// return false so the form does not actually
 	// submit to the page
 	return false;
 }
 
 var resetForm = function() {
-	form = $('#theForm');
+	var form = $('#theForm');
 	form.find("[name='formAction']").val('cAdd');
 	form.find("[name^='c']").val('');
 	form.find("[name^='j']").val('');
@@ -98,14 +117,14 @@ var deleteData = function(cid, jid) {
 		dataType: 'json'
 	}).done(function(rsp) {
 		if(rsp.success) {
-			loadData();
+			loadList(getList());
 		} else {
 			alert( "something went wrong!" );
-			showList();
+			showList(getList());
 		}
 	}).fail(function() {
 		alert( "delete failed!" );
-		showList();
+		showList(getList());
 	})
 	return false;
 };
@@ -113,6 +132,7 @@ var deleteData = function(cid, jid) {
 var addJData = function(cid) {
 	if(!!cid) {
 		resetForm();
+		var form = $('#theForm');
 		form.find("[name='formAction']").val('jAdd');
 		form.find("[name='companyID']").val(cid);
 		showJobForm('Add Job');
@@ -154,11 +174,32 @@ var editCData = function(cid, el) {
 	return false;
 };
 
+var editCData = function(cid, el) {
+	if(!!cid && !!el) {
+		var form = $('#theForm'), parentEL = $(el).closest(".listLayer");
+		showCompanyForm('Edit Company');
+		form.find("[name='formAction']").val('cEdit');
+		form.find("[name='companyID']").val(cid);
+		form.find("[name='country']").val(parentEL.find(".cellCounty").text());
+		form.find("[name='city']").val(parentEL.find(".cellCity").text());
+		form.find("[name='cname']").val(parentEL.find(".cellCompany").text());
+		form.find("[name='clink']").val(parentEL.find(".cellCompanyLink").attr('href'));
+		form.find("[name='cinfos']").val(parentEL.find(".cellInfos").text());
+		form.find("[name='caddress']").val(parentEL.find(".cellAddress").text());
+		form.find("[name='caddress_link']").val(parentEL.find(".cellAddressLink").attr('href'));
+		form.find("[name='croute']").val(parentEL.find(".cellRoute").text());
+		form.find("[name='cratings']").val(parentEL.find(".cellRatings").text());
+		form.find("[name='cnotes']").val(parentEL.find(".cellNotes").text());
+	}
+	return false;
+};
+
 /*
  * onload functions
  * ****************
  */
 $( document ).ready(function() {
 	resetForm();
-	loadData();
+	loadList(['hList']);
+	initListTabs();
 });
