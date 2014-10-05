@@ -17,27 +17,143 @@ var showList = function(list) {
 	$("[data-target='"+list+"']").show();
 }
 /* form switching */
+var showSearchField = function(bText) {
+	$('#jobFields').hide();
+	$('#companyFields').hide();
+	$('#formButtons').hide();
+	$('#startButton').show();
+	$('#searchField').show();
+	$("#urlInput").val('');
+	$("#urlInput").attr('autocomplete', 'off');
+	switchStatusButtonText(bText)
+}
 var showCompanyForm = function(bText) {
 	$('#jobFields').hide();
+	$('#startButton').hide();
+	$('#searchField').hide();
+	$('#formButtons').show();
 	$('#companyFields').show();
-	switchButtonText(bText);
+	switchFormButtonText(bText);
 }
 var showJobForm = function(bText) {
-	$('#jobFields').show();
 	$('#companyFields').hide();
-	switchButtonText(bText);
+	$('#startButton').hide();
+	$('#searchField').hide();
+	$('#formButtons').show();
+	$('#jobFields').show();
+	switchFormButtonText(bText);
 }
-var switchButtonText = function(txt) {
+var switchFormButtonText = function(txt) {
 	$('#formSubmit').text(txt);
 }
+var switchStatusButtonText = function(txt, status, warning) {
+	var el = $('#inputStatus'), warn = $('#inputWarning');
+	if(!status) {
+		el.removeClass().addClass("pure-button-disabled pure-button");
+	}
+	if(!warning) {
+		warn.text(' ');
+	}
+	if(!!status && status == 'active') {
+		el.removeClass().addClass("pure-button button-success");
+	}
+	if(!!warning && warning!='' ) {
+		warn.text(warning);
+	}
+	el.text(txt);
+}
+
 var getList = function() {
 	return $('#theForm').find("[name='ltype']").val();
 }
+var getListType = function(x) {
+	var s = x.split(';')[1]; 
+	if( s == 'hl' ) return 'HOT LIST';
+	if( s == 'il' ) return 'INTERESTING LIST';
+	if( s == 'bl' ) return 'BLACK LIST';
+	return false;
+}
+
+var getComparableString = function(s) {
+	if( s.indexOf('//') != -1 && s.split('//')[1] != "") {
+		s = s.split('//')[1].split('/')[0];
+		if( s.indexOf('.') != -1 ) {
+			s = s.split('.');
+			if( s[s.length-1].length > 1 ) {
+				return s[s.length-2] + '.' + s[s.length-1];
+			}
+		}
+	} else {
+		s = s.split('/')[0];
+		if( s.indexOf('.') != -1 ) {
+			s = s.split('.');
+			if( s[s.length-1].length > 1 ) {
+				return s[s.length-2] + '.' + s[s.length-1];
+			}
+		}
+	}
+	return false;
+}
+var compareStrings = function(s1,s2) {
+	var c1 = getComparableString(s1);
+	var c2 = getComparableString(s2);
+	if(c1==c2) {
+		return 1;
+	}
+	if( (!!c1 && !!c2) 
+			&& ( c1.split('.')[1] != c2.split('.')[1] ) 
+			&& ( c1.split('.')[0] == c2.split('.')[0] ) 
+		) {
+		return 0;
+	}
+	return -1;
+}
+
 
 /*
  * main functions
  * **************
  */
+
+var initCheckField = function() {
+	$("#urlInput").keyup(function() {
+		if(this.value.length==0) {
+			switchStatusButtonText('Waiting for Input'); return false;
+		}
+		if(this.value.length>3) {
+			if( !!getComparableString(this.value) ) {
+				var hostExist = false, nameExist = false, tmpURL, tmpList;
+				for (i in companyList) {
+					var splitResult = companyList[i].split(';');
+					if( compareStrings(this.value,splitResult[0]) == 1 ) {
+						switchStatusButtonText( getComparableString(splitResult[0])+' already exist in '+splitResult[1]+'!' );
+						return false;
+					}
+					if(compareStrings(this.value,splitResult[0]) == 0 ) {
+						nameExist = true;
+						tmpURL  = getComparableString(splitResult[0]);
+						tmpList = splitResult[1];
+					}
+				};
+				switchStatusButtonText('Enter New Company','active');
+				if(nameExist) {
+					switchStatusButtonText('Enter New Company','active',"similar "+tmpURL+" already exist in "+tmpList+"!");
+				}
+				return false;
+			}
+		}
+		switchStatusButtonText('URL is invalid!');
+		return false;
+	});
+	$('#inputStatus').click(function(){
+		if( ! $(this).hasClass('pure-button-disabled') ) {
+			showCompanyForm('Add New Company');
+			$("#clink").val( $("#urlInput").val() );
+		}
+		return false;
+	});
+	return false;
+}
 
 var initListTabs = function() {
 	$("[data-list]").click(function(){
@@ -53,8 +169,9 @@ var loadList = function(list) {
 		url: 'src/ljshFunc.php?a=f&l='+list,
 		dataType: 'html',
 		cache: false
-	}).done(function(response) {
-		$("[data-target='"+list+"']").html(response);
+	}).done(function(data, textStatus, jqXHR) {
+		$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
+		$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
 	}).fail(function() {
 		alert( "fetch failed!" );
 	}).always(function() {
@@ -98,7 +215,7 @@ var resetForm = function() {
 	form.find("[name='formAction']").val('cAdd');
 	form.find("[name^='c']").val('');
 	form.find("[name^='j']").val('');
-	showCompanyForm('Add Company'); 
+	showSearchField('Waiting for Input');
 	return false;
 };
 
@@ -135,7 +252,7 @@ var addJData = function(cid) {
 		var form = $('#theForm');
 		form.find("[name='formAction']").val('jAdd');
 		form.find("[name='companyID']").val(cid);
-		showJobForm('Add Job');
+		showJobForm('Add New Job');
 	}
 	return false;
 };
@@ -202,4 +319,5 @@ $( document ).ready(function() {
 	resetForm();
 	loadList(['hList']);
 	initListTabs();
+	initCheckField();
 });

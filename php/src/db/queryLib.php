@@ -3,6 +3,12 @@
 	$query['select_all_companies'] = "
 		SELECT `COMPANY_ID`,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`jobs`,`notes`,`list` 
 		FROM companies ";
+	
+	$query['select_all_company_links'] = "
+		SELECT `com_link`,`list`
+		FROM companies ";
+
+	$query['order_by_date'] = "ORDER BY `creationDate` DESC";
 
 	$query['select_companies_where_list'] = "
 		SELECT `COMPANY_ID`,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`jobs`,`notes`,`list` 

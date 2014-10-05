@@ -2,7 +2,7 @@
 
 if( $list = get('l') ) {
 
-	$query_companies = mysql_query($query['select_companies_where_list'] . "'$list'", $db_connection);
+	$query_companies = mysql_query($query['select_companies_where_list'] . "'$list' " . $query['order_by_date'], $db_connection);
 	
 	if($query_companies) {
 		
@@ -63,7 +63,7 @@ if( $list = get('l') ) {
 			echo "<div class=\"contentCellBasic\" style=\"width: 35%;\">";
 				if($row[10]>0) {
 					// get all jobs with the from the current company
-					$query_jobs = mysql_query($query['select_all_jobs_where_company_id'] . $row[0], $db_connection);
+					$query_jobs = mysql_query($query['select_all_jobs_where_company_id'] . $row[0]. " " . $query['order_by_date'], $db_connection);
 					if($query_jobs) {
 						while ($jobRow = mysql_fetch_array($query_jobs, MYSQL_NUM)) {
 							/* $jobRow[0]=`JOB_ID`
@@ -123,6 +123,26 @@ if( $list = get('l') ) {
 		echo "<br>";
 	}
 
+} else {
+	echo "[ERROR] Query failed!";
+	echo "<br>";
+}
+
+$query_companies = mysql_query($query['select_all_company_links'], $db_connection);
+
+if($query_companies) {
+	echo "<script id=\"allLinks\">";
+	echo "companyList = [";
+	$isFirstLine = true;
+	while ($row = mysql_fetch_array($query_companies, MYSQL_NUM)) {
+		if(!$isFirstLine) {
+			echo ",";
+		}
+		echo "'$row[0];$row[1]'";
+		$isFirstLine = false;
+	}
+	echo "];";
+	echo "</script>";
 } else {
 	echo "[ERROR] Query failed!";
 	echo "<br>";

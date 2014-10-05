@@ -16,13 +16,19 @@
 	<!--<![endif]-->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/ljsh-0.1.0.js"></script>
+	<script id="allLinks">
+		companyList = [];
+	</script>
 
 </head>
 <body class="background">
-
+<?php
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
+?>
 	<!-- HEAD BEGIN-->
 	<div class="basicLayerHead">
-		<span>LJSH (a0.1.0) <i><?php echo "on " . $_SERVER['SERVER_NAME'] ?></i></span>
+		<span>LJSH (a0.1.0) <i><?php echo "on " . $_SERVER['SERVER_NAME'] ?></i> | <?php echo $details->country . " (" .$ip . ")" ?></span>
 	</div>
 	<!-- HEAD END -->
 	
@@ -34,10 +40,18 @@
 			<input id="jobID" type="hidden" name="jobID" value="" />
 			<input id="ltype" type="hidden" name="ltype" value="hList" />
 			<div class="contentLayer">
-				<fieldset id="companyFields">
+				<fieldset id="searchField" style="text-align:center">
+					<div class="pure-g" >
+						<div class="pure-u-1 pure-u-md-1-1">
+							<label for="urlInput">Type or Copy the Company URL in here</label>
+							<input id="urlInput" type="text" name="linkInput" value="" style="display: inline;width: 325px;text-align:center">
+						</div>
+					</div>
+				</fieldset>
+				<fieldset id="companyFields" style="display:none;">
 					<div class="pure-g">
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="clink">Company Link</label>
+							<label for="clink">Company URL</label>
 							<input id="clink" type="text" name="clink" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
@@ -119,8 +133,16 @@
 						background: rgb(202, 60, 60); /* this is a maroon */
 					}
 				</style>
-				<button id="formSubmit" type="submit" name="form_submit" class="pure-button button-success">Add Company</button>
-				<button id="formReset" type="reset" name="form_reset" class="pure-button button-error">Cancel</button>
+				<div id="startButton">
+					<button id="inputStatus" class="pure-button-disabled pure-button">
+						Waiting for Input
+					</button>
+					<br><span id="inputWarning" style="height:9px; font-size: 10px;"></span>
+				</div>
+				<div id="formButtons" style="display:none">
+					<button id="formSubmit" type="submit" name="form_submit" class="pure-button button-success">Add New Company</button>
+					<button id="formReset" type="reset" name="form_reset" class="pure-button button-error">Cancel</button>
+				</div>
 			</div>
 		</form>
 	</div>
