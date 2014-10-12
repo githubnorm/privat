@@ -4,6 +4,10 @@
  */
 
 /* loading */
+var resetWarningsAndErrors = function() {
+	$('#inputWarnings').text(''); $('#inputErrors').text('');
+	return false;
+}
 var hideLists = function() {
 	$("[data-target]").hide();
 	return false;
@@ -47,7 +51,7 @@ var switchFormButtonText = function(txt) {
 	$('#formSubmit').text(txt);
 }
 var switchStatusButtonText = function(txt, status, warning) {
-	var el = $('#inputStatus'), warn = $('#inputWarning');
+	var el = $('#inputStatus'), warn = $('#inputWarnings');
 	if(!status) {
 		el.removeClass().addClass("pure-button-disabled pure-button");
 	}
@@ -116,9 +120,10 @@ var compareStrings = function(s1,s2) {
  */
 
 var initCheckField = function() {
+	resetWarningsAndErrors();
 	$("#urlInput").keyup(function() {
 		if(this.value.length==0) {
-			switchStatusButtonText('Waiting for Input'); return false;
+			switchStatusButtonText( msg['button_text_waiting'] ); return false;
 		}
 		if(this.value.length>3) {
 			if( !!getComparableString(this.value) ) {
@@ -126,7 +131,7 @@ var initCheckField = function() {
 				for (i in companyList) {
 					var splitResult = companyList[i].split(';');
 					if( compareStrings(this.value,splitResult[0]) == 1 ) {
-						switchStatusButtonText( getComparableString(splitResult[0])+' already exist in '+splitResult[1]+'!' );
+						switchStatusButtonText( getComparableString(splitResult[0])+' '+msg['warning_msg_exist']+' '+splitResult[1]+'!' );
 						return false;
 					}
 					if(compareStrings(this.value,splitResult[0]) == 0 ) {
@@ -135,19 +140,19 @@ var initCheckField = function() {
 						tmpList = splitResult[1];
 					}
 				};
-				switchStatusButtonText('Enter New Company','active');
+				switchStatusButtonText( msg['button_text_enter_company'] ,'active');
 				if(nameExist) {
-					switchStatusButtonText('Enter New Company','active',"similar "+tmpURL+" already exist in "+tmpList+"!");
+					switchStatusButtonText( msg['button_text_enter_company'] ,'active', tmpURL+" "+msg['warning_msg_similar_exist']+" "+tmpList+"!");
 				}
 				return false;
 			}
 		}
-		switchStatusButtonText('URL is invalid!');
+		switchStatusButtonText( msg['button_text_invalid'] );
 		return false;
 	});
 	$('#inputStatus').click(function(){
 		if( ! $(this).hasClass('pure-button-disabled') ) {
-			showCompanyForm('Add New Company');
+			showCompanyForm( msg['button_text_add_company'] );
 			$("#clink").val( $("#urlInput").val() );
 		}
 		return false;
@@ -156,6 +161,7 @@ var initCheckField = function() {
 }
 
 var initListTabs = function() {
+	resetWarningsAndErrors();
 	$("[data-list]").click(function(){
 		loadList($(this).attr('data-list'));
 	});
@@ -163,6 +169,7 @@ var initListTabs = function() {
 }
 
 var loadList = function(list) {
+	resetWarningsAndErrors();
 	showLoader();
 	$('#theForm').find("[name='ltype']").val(list);
 	$.ajax({
@@ -170,10 +177,14 @@ var loadList = function(list) {
 		dataType: 'html',
 		cache: false
 	}).done(function(data, textStatus, jqXHR) {
-		$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
-		$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
+		if(data!="") {
+			$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
+			$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
+		} else {
+			$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+		}
 	}).fail(function() {
-		alert( "fetch failed!" );
+		$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
 	}).always(function() {
 		showList(list);
 	});
@@ -181,6 +192,7 @@ var loadList = function(list) {
 }
 
 var ajaxSubmit = function(formEl) {
+	resetWarningsAndErrors();
 	showLoader();
 	var form = $(formEl);
 	var url  = form.attr('action'); // fetch where we want to submit the form to
@@ -193,15 +205,15 @@ var ajaxSubmit = function(formEl) {
 		type: 'POST',
 		data: data,
 		dataType: 'json'
-	}).done(function(rsp) {
-		if(rsp.success) {
+	}).done(function(data, textStatus, jqXHR) {
+		if(data.success) {
 			loadList(list);
 		} else {
-			alert( "something went wrong!" );
+			$('#inputErrors').text( msg['error_msg_submit_failed'] );
 			showList(list);
 		}
 	}).fail(function() {
-		alert( "db operation failed!" );
+		$('#inputErrors').text( msg['error_msg_submit_failed'] );
 		showList(list);
 	});
 	
@@ -211,15 +223,17 @@ var ajaxSubmit = function(formEl) {
 }
 
 var resetForm = function() {
+	resetWarningsAndErrors();
 	var form = $('#theForm');
 	form.find("[name='formAction']").val('cAdd');
 	form.find("[name^='c']").val('');
 	form.find("[name^='j']").val('');
-	showSearchField('Waiting for Input');
+	showSearchField( msg['button_text_waiting'] );
 	return false;
 };
 
 var deleteData = function(cid, jid) {
+	resetWarningsAndErrors();
 	showLoader();
 	var delete_url = 'src/ljshFunc.php?a=d';
 	if(jid==0) {
@@ -236,28 +250,30 @@ var deleteData = function(cid, jid) {
 		if(rsp.success) {
 			loadList(getList());
 		} else {
-			alert( "something went wrong!" );
+			$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
 			showList(getList());
 		}
 	}).fail(function() {
-		alert( "delete failed!" );
+		$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
 		showList(getList());
 	})
 	return false;
 };
 
 var addJData = function(cid) {
+	resetWarningsAndErrors();
 	if(!!cid) {
 		resetForm();
 		var form = $('#theForm');
 		form.find("[name='formAction']").val('jAdd');
 		form.find("[name='companyID']").val(cid);
-		showJobForm('Add New Job');
+		showJobForm( msg['button_text_add_job'] );
 	}
 	return false;
 };
 
 var editJData = function(jid, el) {
+	resetWarningsAndErrors();
 	if(!!jid && !!el) {
 		resetForm();
 		var form = $('#theForm'), parentEL = $(el).closest(".jobRow");
@@ -266,15 +282,15 @@ var editJData = function(jid, el) {
 		form.find("[name='jposition']").val(parentEL.find('.cellPosition').text());
 		form.find("[name='jlink']").val(parentEL.find('a').attr('href'));
 		form.find("[name='jnotes']").val(parentEL.find('.cellJobNotes').text());
-		showJobForm('Edit Job');
+		showJobForm( msg['button_text_edit_job'] );
 	}
 	return false;
 };
 
 var editCData = function(cid, el) {
+	resetWarningsAndErrors();
 	if(!!cid && !!el) {
 		var form = $('#theForm'), parentEL = $(el).closest(".listLayer");
-		showCompanyForm('Edit Company');
 		form.find("[name='formAction']").val('cEdit');
 		form.find("[name='companyID']").val(cid);
 		form.find("[name='country']").val(parentEL.find(".cellCounty").text());
@@ -287,26 +303,7 @@ var editCData = function(cid, el) {
 		form.find("[name='croute']").val(parentEL.find(".cellRoute").text());
 		form.find("[name='cratings']").val(parentEL.find(".cellRatings").text());
 		form.find("[name='cnotes']").val(parentEL.find(".cellNotes").text());
-	}
-	return false;
-};
-
-var editCData = function(cid, el) {
-	if(!!cid && !!el) {
-		var form = $('#theForm'), parentEL = $(el).closest(".listLayer");
-		showCompanyForm('Edit Company');
-		form.find("[name='formAction']").val('cEdit');
-		form.find("[name='companyID']").val(cid);
-		form.find("[name='country']").val(parentEL.find(".cellCounty").text());
-		form.find("[name='city']").val(parentEL.find(".cellCity").text());
-		form.find("[name='cname']").val(parentEL.find(".cellCompany").text());
-		form.find("[name='clink']").val(parentEL.find(".cellCompanyLink").attr('href'));
-		form.find("[name='cinfos']").val(parentEL.find(".cellInfos").text());
-		form.find("[name='caddress']").val(parentEL.find(".cellAddress").text());
-		form.find("[name='caddress_link']").val(parentEL.find(".cellAddressLink").attr('href'));
-		form.find("[name='croute']").val(parentEL.find(".cellRoute").text());
-		form.find("[name='cratings']").val(parentEL.find(".cellRatings").text());
-		form.find("[name='cnotes']").val(parentEL.find(".cellNotes").text());
+		showCompanyForm( msg['button_text_edit_company'] );
 	}
 	return false;
 };

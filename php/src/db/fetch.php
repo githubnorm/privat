@@ -118,34 +118,33 @@ if( $list = get('l') ) {
 			";
 		}
 		
-	} else {
-		echo "[ERROR] Query failed!";
-		echo "<br>";
-	}
-
-} else {
-	echo "[ERROR] Query failed!";
-	echo "<br>";
-}
-
-$query_companies = mysql_query($query['select_all_company_links'], $db_connection);
-
-if($query_companies) {
-	echo "<script id=\"allLinks\">";
-	echo "companyList = [";
-	$isFirstLine = true;
-	while ($row = mysql_fetch_array($query_companies, MYSQL_NUM)) {
-		if(!$isFirstLine) {
-			echo ",";
+		$query_companies = mysql_query($query['select_all_company_links'], $db_connection);
+		
+		if($query_companies) {
+			echo "<script id=\"allLinks\">";
+				echo "companyList = [";
+				$isFirstLine = true;
+				while ($row = mysql_fetch_array($query_companies, MYSQL_NUM)) {
+					if(!$isFirstLine) {
+						echo ",";
+					}
+					echo "'$row[0];$row[1]'";
+					$isFirstLine = false;
+				}
+				echo "];";
+			echo "</script>";
+		} else {
+			echo "<script id=\"allLinks\">";
+				echo "companyList = []; // [ERROR] Query failed!";
+			echo "</script>";
 		}
-		echo "'$row[0];$row[1]'";
-		$isFirstLine = false;
+		
+	} else {
+		echo "";
 	}
-	echo "];";
-	echo "</script>";
+
 } else {
-	echo "[ERROR] Query failed!";
-	echo "<br>";
+	echo "";
 }
 
 ?>

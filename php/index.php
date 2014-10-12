@@ -1,7 +1,21 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<?php
+	include "src/lang/msgLib.php";
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
+	session_start();
+	if (!isset($_SESSION['lang'])) {
+		$_SESSION['lang'] = 'en';
+	} else {
+		if (isset($_GET['la']) && !empty($_GET['la'])) {
+			$_SESSION['lang'] = $_GET['la'];
+		}
+	}
+	$lang = $_SESSION['lang'];
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>php testing <?php echo "[" . $_SERVER['SERVER_NAME'] . "]" ?></title>
@@ -14,21 +28,17 @@
 	<!--[if gt IE 8]><!-->
 	  <link rel="stylesheet" href="http://yui.yahooapis.com/combo?pure/0.5.0/base-min.css&pure/0.5.0/grids-min.css&pure/0.5.0/grids-responsive-min.css">
 	<!--<![endif]-->
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/ljsh-0.1.0.js"></script>
 	<script id="allLinks">
 		companyList = [];
 	</script>
-
+	<?php include "src/lang/msgScript.php" ?>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/ljsh-0.1.0.js"></script>
 </head>
 <body class="background">
-<?php
-	$ip = $_SERVER['REMOTE_ADDR'];
-	$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
-?>
 	<!-- HEAD BEGIN-->
 	<div class="basicLayerHead">
-		<span>LJSH (a0.1.0) <i><?php echo "on " . $_SERVER['SERVER_NAME'] ?></i> | <?php echo $details->country . " (" .$ip . ")" ?></span>
+		<span>LJSH (a0.1.0) | <i><?php echo $details->country . " (" .$ip . ") " . $lang ?></i> | <a data-lang="en" href="/privat/php/?la=en">EN</a> / <a data-lang="de" href="/privat/php/?la=de">DE</a> </span>
 	</div>
 	<!-- HEAD END -->
 	
@@ -43,7 +53,7 @@
 				<fieldset id="searchField" style="text-align:center">
 					<div class="pure-g" >
 						<div class="pure-u-1 pure-u-md-1-1">
-							<label for="urlInput">Type or Copy the Company URL in here</label>
+							<label for="urlInput"><?php echo $msg[$lang]['label_searchfield'] ?></label>
 							<input id="urlInput" type="text" name="linkInput" value="" style="display: inline;width: 325px;text-align:center">
 						</div>
 					</div>
@@ -51,44 +61,44 @@
 				<fieldset id="companyFields" style="display:none;">
 					<div class="pure-g">
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="clink">Company URL</label>
+							<label for="clink"><?php echo $msg[$lang]['label_company_url'] ?></label>
 							<input id="clink" type="text" name="clink" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cname">Company Name</label>
+							<label for="cname"><?php echo $msg[$lang]['label_company_name'] ?></label>
 							<input id="cname" type="text" name="cname" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="country">Country</label>
+							<label for="country"><?php echo $msg[$lang]['label_company_country'] ?></label>
 							<input id="country" type="text" name="country" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="city">City</label>
+							<label for="city"><?php echo $msg[$lang]['label_company_city'] ?></label>
 							<input id="city" type="text" name="city" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cinfos">Company Infos</label>
+							<label for="cinfos"><?php echo $msg[$lang]['label_company_infos'] ?></label>
 							<input id="cinfos" type="text" name="cinfos" value="">
 						</div>
 						
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="caddress">Street, Post Code</label>
+							<label for="caddress"><?php echo $msg[$lang]['label_company_address'] ?></label>
 							<input id="caddress" type="text" name="caddress" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="caddress_link">Map Link</label>
+							<label for="caddress_link"><?php echo $msg[$lang]['label_company_map_url'] ?></label>
 							<input id="caddress_link" type="text" name="caddress_link" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="croute">Route</label>
+							<label for="croute"><?php echo $msg[$lang]['label_company_route_notes'] ?></label>
 							<input id="croute" type="text" name="croute" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cratings">Ratings</label>
+							<label for="cratings"><?php echo $msg[$lang]['label_company_ratings'] ?></label>
 							<input id="cratings" type="text" name="cratings" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cnotes">Notes</label>
+							<label for="cnotes"><?php echo $msg[$lang]['label_company_notes'] ?></label>
 							<input id="cnotes" type="text" name="cnotes" value="">
 						</div>
 	<!-- 						<div class="pure-u-1 pure-u-md-1-3"> -->
@@ -104,15 +114,15 @@
 				<fieldset id="jobFields" style="display:none;">
 					<div class="pure-g">
 						<div class="pure-u-1 pure-u-md-1-3">
-							<label for="jposition">Position Name</label>
+							<label for="jposition"><?php echo $msg[$lang]['label_job_position'] ?></label>
 							<input id="jposition" type="text" name="jposition" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-3">
-							<label for="jlink">Company Name</label>
+							<label for="jlink"><?php echo $msg[$lang]['label_job_url'] ?></label>
 							<input id="jlink" type="text" name="jlink" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-3">
-							<label for="jnotes">Notes</label>
+							<label for="jnotes"><?php echo $msg[$lang]['label_job_notes'] ?></label>
 							<input id="jnotes" type="text" name="jnotes" value="">
 						</div>
 					</div>
@@ -135,31 +145,29 @@
 				</style>
 				<div id="startButton">
 					<button id="inputStatus" class="pure-button-disabled pure-button">
-						Waiting for Input
+						<?php echo $msg[$lang]['button_text_waiting'] ?>
 					</button>
-					<br><span id="inputWarning" style="height:9px; font-size: 10px;"></span>
+					<br><span id="inputWarnings" style="height:9px; font-size: 10px;"></span>
 				</div>
 				<div id="formButtons" style="display:none">
-					<button id="formSubmit" type="submit" name="form_submit" class="pure-button button-success">Add New Company</button>
-					<button id="formReset" type="reset" name="form_reset" class="pure-button button-error">Cancel</button>
+					<button id="formSubmit" type="submit" name="form_submit" class="pure-button button-success"><?php echo $msg[$lang]['button_text_add_company'] ?></button>
+					<button id="formReset" type="reset" name="form_reset" class="pure-button button-error"><?php echo $msg[$lang]['button_text_cancel'] ?></button>
+					<br><span id="inputErrors" style="color:red; height:9px; font-size: 10px;"></span>
 				</div>
 			</div>
 		</form>
 	</div>
 	<!-- FORMS END-->
 	
-	<!-- CONTENTS BEGIN-->
+	<!-- TEST CONTENTS BEGIN-->
 	<div class="basicLayer" style="display:none;">
 		<div class="contentLayer">
-		
 			<div class="listLayer">
-			
 				<div class="contentCellBasic" style="width: 25px;">
 					<div class="contentCellLayer">
 						<span class="cellCounty">DE</span><br> 
 					</div>
 				</div>
-				
 				<div class="contentCellBasic" style="width: 24%;">
 					<a class="cellCompanyLink" href="https://www.google.de/search?q=xyz2" target="_blank">
 						<div class="contentCellLayer cellHover" style="width:98%;">
@@ -173,7 +181,6 @@
 						<span class="cellNotes">clubmates</span>
 					</div>
 				</div>
-				
 				<div class="contentCellBasic" style="width: 24%;"">
 					<a class="cellAddressLink" href="https://www.google.de/maps/@53.558572,9.9278215,10z?hl=en" target="_blank">
 						<div class="contentCellLayer cellHover" style="width:98%;">
@@ -188,7 +195,6 @@
 						<span class="cellRatings">http://www.kununu.com/;3/5</span>
 					</div>
 				</div>
-				
 				<div class="contentCellBasic" style="width: 35%;">
 					<div class="jobRow">
 						<a href="http://www.job.de" target="_blank">
@@ -224,7 +230,6 @@
 						</span>
 					</div>
 				</div>
-				
 				<div class="contentCellBasic">
 					<span class="button" style="background: lightgreen" onclick="addJData(6)">
 						<img class="buttonImgCompany" src="img/add.png" />
@@ -236,19 +241,19 @@
 						<img class="buttonImgCompany" src="img/delete.png" />
 					</span>
 				</div>
-				
 				<p style="clear: both;">
 			</div>
-			
 		</div>
 	</div>
+	<!-- TEST CONTENTS END-->
 	
+	<!-- CONTENTS BEGIN-->
 	<div class="basicLayer">
 		<div class="contentLayer">
 			<div style="display: block;">
-				<div data-list="hList" class="button" style="width: 33%; text-align: center;">HOT LIST</div>
-				<div data-list="iList" class="button" style="width: 33%; text-align: center;">INTERESTING LIST</div>
-				<div data-list="bList" class="button" style="width: 33%; text-align: center;">BLACK LIST</div>
+				<div data-list="hList" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_hot'] ?></div>
+				<div data-list="iList" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_interesting'] ?></div>
+				<div data-list="bList" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_black'] ?></div>
 			</div>
 			<p style="clear: both;">
 			<div id="lists">
@@ -268,6 +273,6 @@
 		</div>
 	</div>
 	<!-- CONTENTS END-->
-
+	
 </body>
 </html>

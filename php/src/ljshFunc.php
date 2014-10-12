@@ -1,5 +1,10 @@
 <?php
 
+	
+	error_reporting(0); // Error Reporting komplett abschalten
+// 	ini_set('error_reporting', E_ALL); // Melde alle PHP Fehler (siehe Changelog);
+// 	error_reporting(E_ALL); // Melde alle PHP Fehler
+
 	include "db/connect.php"; // open db connection
 	include "db/queryLib.php"; // load a query lib
 	include "functionLib.php";
