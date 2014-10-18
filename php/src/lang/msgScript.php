@@ -13,6 +13,7 @@
 		print("msg['warning_msg_similar_exist']=\"". $msg[ $_SESSION['lang'] ]['warning_msg_similar_exist'] . "\";");
 		print("msg['error_msg_fetch_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_fetch_failed'] . "\";");
 		print("msg['error_msg_submit_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_submit_failed'] . "\";");
+		print("msg['error_msg_move_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_move_failed'] . "\";");
 		print("msg['error_msg_delete_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_delete_failed'] . "\";");
 	print("</script>");
 	

@@ -2,7 +2,7 @@
 
 if( $list = get('l') ) {
 
-	$query_companies = mysql_query($query['select_companies_where_list'] . "'$list' " . $query['order_by_date'], $db_connection);
+	$query_companies = mysql_query($query['select_companies_where_list'] . "$list " . $query['order_by_date'], $db_connection);
 	
 	if($query_companies) {
 		
@@ -113,9 +113,16 @@ if( $list = get('l') ) {
 							<img class=\"buttonImgCompany\" src=\"img/delete.png\" />
 						</span>
 					</div>
+					<div class=\"contentCellBasic\">";
+					if($list!=1) {
+						echo "<span class=\"button\" style=\"background: lightgrey\" onclick=\"moveData($row[0],".($list-1).")\"><<</span>";
+					}
+					if($list!=3) {
+						echo "<span class=\"button\" style=\"background: lightgrey\" onclick=\"moveData($row[0],".($list+1).")\">>></span>";
+					}
+			echo "</div>
 					<p style=\"clear: both;\">
-				</div>
-			";
+				</div>";
 		}
 		
 		$query_companies = mysql_query($query['select_all_company_links'], $db_connection);

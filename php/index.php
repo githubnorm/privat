@@ -48,7 +48,7 @@
 			<input id="formAction" type="hidden" name="formAction" value="cAdd" />
 			<input id="companyID" type="hidden" name="companyID" value="" />
 			<input id="jobID" type="hidden" name="jobID" value="" />
-			<input id="ltype" type="hidden" name="ltype" value="hList" />
+			<input id="ltype" type="hidden" name="ltype" value="1" />
 			<div class="contentLayer">
 				<fieldset id="searchField" style="text-align:center">
 					<div class="pure-g" >
@@ -251,19 +251,19 @@
 	<div class="basicLayer">
 		<div class="contentLayer">
 			<div style="display: block;">
-				<div data-list="hList" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_hot'] ?></div>
-				<div data-list="iList" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_interesting'] ?></div>
-				<div data-list="bList" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_black'] ?></div>
+				<div data-list="1" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_hot'] ?></div>
+				<div data-list="2" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_interesting'] ?></div>
+				<div data-list="3" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_black'] ?></div>
 			</div>
 			<p style="clear: both;">
 			<div id="lists">
-				<div data-target="hList">
+				<div data-target="1">
 					<!-- db data -->
 				</div>
-				<div data-target="iList" style="display:none;">
+				<div data-target="2" style="display:none;">
 					<!-- db data -->
 				</div>
-				<div data-target="bList" style="display:none;">
+				<div data-target="3" style="display:none;">
 					<!-- db data -->
 				</div>
 			</div>

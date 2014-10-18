@@ -38,7 +38,7 @@
 			
 		}
 	} else {
-		echo "parameter are not full filled"; exit;
+		$result = false;
 	}
 	
 	toJSON($result);

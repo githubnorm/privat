@@ -103,6 +103,8 @@
 			}
 		}
 	
+	} else {
+		$result = false;
 	}
 	
 	toJSON($result);

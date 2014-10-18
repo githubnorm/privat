@@ -119,6 +119,7 @@ var compareStrings = function(s1,s2) {
  * **************
  */
 
+/* *** INITS *** */
 var initCheckField = function() {
 	resetWarningsAndErrors();
 	$("#urlInput").keyup(function() {
@@ -168,60 +169,6 @@ var initListTabs = function() {
 	return false;
 }
 
-var loadList = function(list) {
-	resetWarningsAndErrors();
-	showLoader();
-	$('#theForm').find("[name='ltype']").val(list);
-	$.ajax({
-		url: 'src/ljshFunc.php?a=f&l='+list,
-		dataType: 'html',
-		cache: false
-	}).done(function(data, textStatus, jqXHR) {
-		if(data!="") {
-			$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
-			$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
-		} else {
-			$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
-		}
-	}).fail(function() {
-		$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
-	}).always(function() {
-		showList(list);
-	});
-	return false;
-}
-
-var ajaxSubmit = function(formEl) {
-	resetWarningsAndErrors();
-	showLoader();
-	var form = $(formEl);
-	var url  = form.attr('action'); // fetch where we want to submit the form to
-	var data = form.serializeArray(); // fetch the data for the form
-	var list = form.find("[name='ltype']").val();
-	
-	// setup the ajax request
-	$.ajax({
-		url: url,
-		type: 'POST',
-		data: data,
-		dataType: 'json'
-	}).done(function(data, textStatus, jqXHR) {
-		if(data.success) {
-			loadList(list);
-		} else {
-			$('#inputErrors').text( msg['error_msg_submit_failed'] );
-			showList(list);
-		}
-	}).fail(function() {
-		$('#inputErrors').text( msg['error_msg_submit_failed'] );
-		showList(list);
-	});
-	
-	// return false so the form does not actually
-	// submit to the page
-	return false;
-}
-
 var resetForm = function() {
 	resetWarningsAndErrors();
 	var form = $('#theForm');
@@ -231,35 +178,128 @@ var resetForm = function() {
 	showSearchField( msg['button_text_waiting'] );
 	return false;
 };
+/* *** INITS *** */
+
+/* *** AJAXS *** */
+var loadList = function(list) {
+	resetWarningsAndErrors();
+	if(!!list) {
+		showLoader();
+		$('#theForm').find("[name='ltype']").val(list);
+		$.ajax({
+			url: 'src/ljshFunc.php?a=f&l='+list,
+			dataType: 'html',
+			cache: false
+		}).done(function(data, textStatus, jqXHR) {
+			if(data!="") {
+				$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
+				$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
+			} else {
+				$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+			}
+		}).fail(function() {
+			$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+		}).always(function() {
+			showList(list);
+		});
+	} else {
+		$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+	}
+	return false;
+}
+
+var ajaxSubmit = function(formEl) {
+	resetWarningsAndErrors();
+	if(!!formEl) {
+		showLoader();
+		var form = $(formEl);
+		var url  = form.attr('action'); // fetch where we want to submit the form to
+		var data = form.serializeArray(); // fetch the data for the form
+		var list = form.find("[name='ltype']").val();
+		
+		// setup the ajax request
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			dataType: 'json'
+		}).done(function(data, textStatus, jqXHR) {
+			if(data.success) {
+				loadList(list);
+			} else {
+				$('#inputErrors').text( msg['error_msg_submit_failed'] );
+				showList(list);
+			}
+		}).fail(function() {
+			$('#inputErrors').text( msg['error_msg_submit_failed'] );
+			showList(list);
+		});
+	} else {
+		$('#inputErrors').text( msg['error_msg_submit_failed'] );
+	}
+	// return false so the form does not actually submit to the page
+	return false;
+}
 
 var deleteData = function(cid, jid) {
 	resetWarningsAndErrors();
-	showLoader();
-	var delete_url = 'src/ljshFunc.php?a=d';
-	if(jid==0) {
-		delete_url = delete_url+'&company_id='+cid+'&all=true'; // TODO: cid, jid
-	} else if(!!jid) {
-		delete_url = delete_url+'&company_id='+cid+'&job_id='+jid;
-	} else {
-		delete_url = delete_url+'&company_id='+cid;
-	}
-	$.ajax({
-		url: delete_url,
-		dataType: 'json'
-	}).done(function(rsp) {
-		if(rsp.success) {
-			loadList(getList());
+	if(!!cid) {
+		showLoader();
+		var delete_url = 'src/ljshFunc.php?a=d';
+		if(jid==0) {
+			delete_url = delete_url+'&company_id='+cid+'&all=true'; // TODO: cid, jid
+		} else if(!!jid) {
+			delete_url = delete_url+'&company_id='+cid+'&job_id='+jid;
 		} else {
+			delete_url = delete_url+'&company_id='+cid;
+		}
+		$.ajax({
+			url: delete_url,
+			dataType: 'json'
+		}).done(function(data, textStatus, jqXHR) {
+			if(data.success) {
+				loadList(getList());
+			} else {
+				$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
+				showList(getList());
+			}
+		}).fail(function() {
 			$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
 			showList(getList());
-		}
-	}).fail(function() {
+		})
+	} else {
 		$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
-		showList(getList());
-	})
+	}
 	return false;
 };
 
+var moveData = function(cid, lid) {
+	resetWarningsAndErrors();
+	if(!!cid && !!lid) {
+		showLoader();
+		var move_url = 'src/ljshFunc.php?a=m&cid='+cid+'&lid='+lid;
+		$.ajax({
+			url: move_url,
+			dataType: 'json'
+		}).done(function(data, textStatus, jqXHR) {
+			if(data.success) {
+				loadList(getList());
+			} else {
+				$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_move_failed']+"</div>");
+				showList(getList());
+			}
+		}).fail(function() {
+			$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_move_failed']+"</div>");
+			showList(getList());
+		})
+	} else {
+		$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_move_failed']+"</div>");
+	}
+	return false;
+};
+/* *** AJAXS *** */
+
+/* *** FORM UI *** */
 var addJData = function(cid) {
 	resetWarningsAndErrors();
 	if(!!cid) {
@@ -307,14 +347,15 @@ var editCData = function(cid, el) {
 	}
 	return false;
 };
+/* *** FORM UI *** */
 
 /*
- * onload functions
- * ****************
+ * onload function
+ * ***************
  */
 $( document ).ready(function() {
 	resetForm();
-	loadList(['hList']);
+	loadList(['1']);
 	initListTabs();
 	initCheckField();
 });
