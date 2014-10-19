@@ -4,7 +4,7 @@
 	$host['localhost'] = "localhost";
 	$name['localhost'] = "root";
 	$pw['localhost'] = "";
-	$dbname['localhost'] = "jobsearch_test";
+	$dbname['localhost'] = "ljsh_test";
 	
 	/* live system configs */
 	$host['czepa.net'] = "db540710562.db.1and1.com";

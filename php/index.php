@@ -48,7 +48,7 @@
 			<input id="formAction" type="hidden" name="formAction" value="cAdd" />
 			<input id="companyID" type="hidden" name="companyID" value="" />
 			<input id="jobID" type="hidden" name="jobID" value="" />
-			<input id="ltype" type="hidden" name="ltype" value="1" />
+			<input id="listID" type="hidden" name="listID" value="1" />
 			<div class="contentLayer">
 				<fieldset id="searchField" style="text-align:center">
 					<div class="pure-g" >
@@ -60,46 +60,38 @@
 				</fieldset>
 				<fieldset id="companyFields" style="display:none;">
 					<div class="pure-g">
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="clink"><?php echo $msg[$lang]['label_company_url'] ?></label>
-							<input id="clink" type="text" name="clink" value="">
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="companyURL"><?php echo $msg[$lang]['label_companyURL'] ?></label>
+							<input id="companyURL" type="text" name="companyURL" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cname"><?php echo $msg[$lang]['label_company_name'] ?></label>
-							<input id="cname" type="text" name="cname" value="">
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="companyName"><?php echo $msg[$lang]['label_companyName'] ?></label>
+							<input id="companyName" type="text" name="companyName" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="country"><?php echo $msg[$lang]['label_company_country'] ?></label>
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="country"><?php echo $msg[$lang]['label_country'] ?></label>
 							<input id="country" type="text" name="country" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="city"><?php echo $msg[$lang]['label_company_city'] ?></label>
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="city"><?php echo $msg[$lang]['label_city'] ?></label>
 							<input id="city" type="text" name="city" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cinfos"><?php echo $msg[$lang]['label_company_infos'] ?></label>
-							<input id="cinfos" type="text" name="cinfos" value="">
-						</div>
 						
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="caddress"><?php echo $msg[$lang]['label_company_address'] ?></label>
-							<input id="caddress" type="text" name="caddress" value="">
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="companyAddress"><?php echo $msg[$lang]['label_companyAddress'] ?></label>
+							<input id="companyAddress" type="text" name="companyAddress" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="caddress_link"><?php echo $msg[$lang]['label_company_map_url'] ?></label>
-							<input id="caddress_link" type="text" name="caddress_link" value="">
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="companyMapURL"><?php echo $msg[$lang]['label_companyMapURL'] ?></label>
+							<input id="companyMapURL" type="text" name="companyMapURL" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="croute"><?php echo $msg[$lang]['label_company_route_notes'] ?></label>
-							<input id="croute" type="text" name="croute" value="">
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="companyRatings"><?php echo $msg[$lang]['label_companyRatings'] ?></label>
+							<input id="companyRatings" type="text" name="companyRatings" value="">
 						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cratings"><?php echo $msg[$lang]['label_company_ratings'] ?></label>
-							<input id="cratings" type="text" name="cratings" value="">
-						</div>
-						<div class="pure-u-1 pure-u-md-1-5">
-							<label for="cnotes"><?php echo $msg[$lang]['label_company_notes'] ?></label>
-							<input id="cnotes" type="text" name="cnotes" value="">
+						<div class="pure-u-1 pure-u-md-1-4">
+							<label for="companyNotes"><?php echo $msg[$lang]['label_companyNotes'] ?></label>
+							<input id="companyNotes" type="text" name="companyNotes" value="">
 						</div>
 	<!-- 						<div class="pure-u-1 pure-u-md-1-3"> -->
 	<!-- 							<label for="state">State</label> -->
@@ -114,16 +106,16 @@
 				<fieldset id="jobFields" style="display:none;">
 					<div class="pure-g">
 						<div class="pure-u-1 pure-u-md-1-3">
-							<label for="jposition"><?php echo $msg[$lang]['label_job_position'] ?></label>
-							<input id="jposition" type="text" name="jposition" value="">
+							<label for="jobPosition"><?php echo $msg[$lang]['label_jobPosition'] ?></label>
+							<input id="jobPosition" type="text" name="jobPosition" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-3">
-							<label for="jlink"><?php echo $msg[$lang]['label_job_url'] ?></label>
-							<input id="jlink" type="text" name="jlink" value="">
+							<label for="jobPositionURL"><?php echo $msg[$lang]['label_jobPositionURL'] ?></label>
+							<input id="jobPositionURL" type="text" name="jobPositionURL" value="">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-3">
-							<label for="jnotes"><?php echo $msg[$lang]['label_job_notes'] ?></label>
-							<input id="jnotes" type="text" name="jnotes" value="">
+							<label for="jobNotes"><?php echo $msg[$lang]['label_jobNotes'] ?></label>
+							<input id="jobNotes" type="text" name="jobNotes" value="degree, XP, tskills, EN">
 						</div>
 					</div>
 				</fieldset>
@@ -251,9 +243,9 @@
 	<div class="basicLayer">
 		<div class="contentLayer">
 			<div style="display: block;">
-				<div data-list="1" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_hot'] ?></div>
-				<div data-list="2" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_interesting'] ?></div>
-				<div data-list="3" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['list_titel_black'] ?></div>
+				<div data-list="1" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['l1'] ?></div>
+				<div data-list="2" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['l2'] ?></div>
+				<div data-list="3" class="button" style="width: 33%; text-align: center;"><?php echo $msg[$lang]['l3'] ?></div>
 			</div>
 			<p style="clear: both;">
 			<div id="lists">

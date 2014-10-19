@@ -1,84 +1,95 @@
 <?php
 
 	/* ### ### ### START OF SELECTS ### ### ### */
-	$query['select_all_companies'] = "
-		SELECT `COMPANY_ID`,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`jobs`,`notes`,`list` 
-		FROM companies ";
 	
-	$query['select_all_company_links'] = "
-		SELECT `com_link`,`list`
+	$query['select_all_company_urls'] = "
+		SELECT `companyURL`,`listID`
 		FROM companies ";
 
-	$query['order_by_date'] = "ORDER BY `creationDate` DESC";
-
-	$query['select_companies_where_list'] = "
-		SELECT `COMPANY_ID`,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`jobs`,`notes`,`list` 
+	$query['select_companies_where_list_id'] = "
+		SELECT `companyID`, `country`, `city`, `companyName`, `companyURL`, `companyAddress`, `companyMapURL`, `companyNotes`, `companyRatings`, `jobCount`,`listID` 
 		FROM companies
-		WHERE `list`=";
+		WHERE `listID`=";
 
-	$query['select_companies_where_jobs'] = "
-		SELECT companies.COMPANY_ID,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`position`,`link`,jobs.notes,`JOB_ID`,companies.notes 
-		FROM companies,jobs 
-		WHERE jobs.company_id=companies.COMPANY_ID 
-		ORDER BY jobs.company_id DESC"; 
-	
-	$query['select_companies_where_no_jobs'] = "
-		SELECT `COMPANY_ID`,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes` 
-		FROM companies 
-		WHERE `jobs`=0";
-	
 	$query['select_all_jobs_where_company_id'] = "
-		SELECT `JOB_ID`,`company_id`,`position`,`link`,`notes`
+		SELECT `jobID`,`companyID`,`jobPosition`,`jobPositionURL`,`jobNotes`
 		FROM jobs
-		WHERE `company_id`="; // --> generic value, please see delete.php
+		WHERE `companyID`="; // --> generic value, please see delete.php
 	
 	$query['select_all_jobs_ids_where_company_id'] = "
-		SELECT `JOB_ID`
+		SELECT `jobID`
 		FROM jobs
-		WHERE `company_id`="; // --> generic value, please see delete.php
+		WHERE `companyID`="; // --> generic value, please see delete.php
+
+	$query['order_by_date'] = "ORDER BY `creationDate` DESC";
+	
+// 	$query['select_all_companies'] = "
+// 		SELECT `companyID`, `country`, `city`, `companyName`, `companyURL`, `companyAddress`, `companyMapURL`, `companyNotes`, `companyRatings`, `jobCount`, `listID`, `userID`, `creationDate` 
+// 		FROM companies ";
+
+// 	$query['select_companies_where_jobs'] = "
+// 		SELECT companies.COMPANY_ID,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`position`,`link`,jobs.notes,`JOB_ID`,companies.notes 
+// 		FROM companies,jobs 
+// 		WHERE jobs.company_id=companies.COMPANY_ID 
+// 		ORDER BY jobs.company_id DESC"; 
+	
+// 	$query['select_companies_where_no_jobs'] = "
+// 		SELECT `COMPANY_ID`,`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes` 
+// 		FROM companies 
+// 		WHERE `jobs`=0";
+	
 	/* +++ +++ +++ END OF SELECTS +++ +++ +++ */
 	
 	
+	
 	/* ### ### ### START OF INSERTS ### ### ###  */
+	
 	$query['insert_company_values'] = "
 		INSERT INTO 
-		`companies`(`country`,`city`,`com_name`,`com_link`,`infos`,`loc_address`,`loc_link`,`loc_route`,`ratings`,`notes`,`list`)";
+		`companies`(`country`,`city`,`companyName`,`companyURL`,`companyAddress`,`companyMapURL`,`companyNotes`,`companyRatings`,`listID`)";
 		// VALUES ('') --> generic, please see update.php
 	
 	$query['insert_job_values'] = "
 		INSERT INTO
-		`jobs`(`company_id`,`position`,`link`,`notes`)";
+		`jobs`(`companyID`, `jobPosition`, `jobPositionURL`, `jobNotes`)";
 		// VALUES ('') --> generic, please see update.php
+		
 	/* +++ +++ +++ END OF INSERTS +++ +++ +++ */
 	
 	
-	/* ### ### ###  START OF UPDATES ### ### ###  */
-	$query['update_jobs_plus_where_company_id'] = "
-		UPDATE `companies`
-		SET jobs = jobs + 1
-		WHERE `COMPANY_ID`="; // --> generic value, please see update.php
 	
-	$query['update_jobs_minus_where_company_id'] = "
+	/* ### ### ###  START OF UPDATES ### ### ###  */
+	
+	$query['update_job_count_plus_where_company_id'] = "
 		UPDATE `companies`
-		SET jobs = jobs - 1
-		WHERE `COMPANY_ID`="; // --> generic value, please see update.php
+		SET jobCount = jobCount + 1
+		WHERE `companyID`="; // --> generic value, please see update.php
+	
+	$query['update_job_count_minus_where_company_id'] = "
+		UPDATE `companies`
+		SET jobCount = jobCount - 1
+		WHERE `companyID`="; // --> generic value, please see update.php
 
-	$query['update_jobs_list..'] = "
+	$query['update_list_id..'] = "
 		UPDATE `companies`
-		SET list = "; // --> generic value, please see move.php
+		SET listID = "; // --> generic value, please see move.php
 	$query['..where_company_id'] = "
-		WHERE `COMPANY_ID`="; // --> generic value, please see move.php
+		WHERE `companyID`="; // --> generic value, please see move.php
+	
 	/* +++ +++ +++ END OF UPDATES +++ +++ +++ */
 	
 	
+	
 	/* ### ### ### START OF DELETES ### ### ### */
+	
 	$query['delete_job_where_id'] = "
 		DELETE FROM `jobs`
-		WHERE `job_id`="; // --> generic value, please see delete.php
+		WHERE `jobID`="; // --> generic value, please see delete.php
 	
 	$query['delete_company_where_id'] = "
 		DELETE FROM `companies`
-		WHERE `company_id`="; // --> generic value, please see delete.php
+		WHERE `companyID`="; // --> generic value, please see delete.php
+	
 	/* +++ +++ +++ END OF DELETES +++ +++ +++ */
 	
 ?>

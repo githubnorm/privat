@@ -11,6 +11,8 @@
 	include "db/queryLib.php"; // load a query lib
 	include "functionLib.php";
 
+	// TODO: refactorings: functions instead of includes
+	
 	/* when db action is delete */
 	if(get('a')=="f") {
 		include "db/fetch.php";

@@ -1,25 +1,22 @@
 <?php 
 
-if( $list = get('l') ) {
+if( $listID = get('lid') ) {
 
-	$query_companies = mysql_query($query['select_companies_where_list'] . "$list " . $query['order_by_date'], $db_connection);
+	$query_companies = mysql_query($query['select_companies_where_list_id'] . "$listID " . $query['order_by_date'], $db_connection);
 	
 	if($query_companies) {
 		
 		while ($row = mysql_fetch_array($query_companies, MYSQL_NUM)) {
-			/* $row[0]=`COMPANY_ID`,
-			 * $row[1]=`country`,
-			 * $row[2]=`city`,
-			 * $row[3]=`com_name`,
-			 * $row[4]=`com_link`,
-			 * $row[5]=`infos`,
-			 * $row[6]=`loc_address`,
-			 * $row[7]=`loc_link`,
-			 * $row[8]=`loc_route`,
-			 * $row[9]=`ratings`,
-			 * $row[10]=`jobs`,
-			 * $row[11]=`notes`,
-			 * $row[12]=`list`,
+			/* $row[0]=`companyID`
+			 * $row[1]=`country`
+			 * $row[2]=`city`
+			 * $row[3]=`companyName`
+			 * $row[4]=`companyURL`
+			 * $row[5]=`companyAddress`
+			 * $row[6]=`companyMapURL`
+			 * $row[7]=`companyNotes`
+			 * $row[8]=`companyRatings`
+			 * $row[9]=`jobCount`
 			 */
 			echo "
 				<div class=\"listLayer\">
@@ -34,43 +31,38 @@ if( $list = get('l') ) {
 						<a class=\"cellCompanyLink\" href=\"$row[4]\" target=\"_blank\">
 							<div class=\"contentCellLayer cellHover\" style=\"width:98%;\">
 								<span class=\"cellCompany\">$row[3]</span>
-								<br>
-								<span class=\"cellInfos\">$row[5]</span>
+							</div>
+						</a>
+						<p class=\"clear\">
+						<a class=\"cellAddressLink\" href=\"$row[6]\" target=\"_blank\">
+							<div class=\"contentCellLayer cellHover\" style=\"width:98%;\">
+								<span class=\"cellAddress\">$row[5]</span> <span class=\"cellCity\">$row[2]</span>
 							</div>
 						</a>
 						<p class=\"clear\">
 						<div class=\"contentCellLayer\" style=\"width:98%;\">
-							<span class=\"cellNotes\">$row[11]</span>
+							<span class=\"cellRatings\">$row[8]</span>
 						</div>
 					</div>
 					
 					<div class=\"contentCellBasic\" style=\"width: 24%;\">
-						<a class=\"cellAddressLink\" href=\"$row[7]\" target=\"_blank\">
-							<div class=\"contentCellLayer cellHover\" style=\"width:98%;\">
-								<span class=\"cellAddress\">$row[6]</span>
-								<span class=\"cellCity\">$row[2]</span>
-								<br>
-								<span class=\"cellRoute\">$row[8]</span><br>
-							</div>
-						</a>
-						<p class=\"clear\">
 						<div class=\"contentCellLayer\" style=\"width:98%;\">
-							<span class=\"cellRatings\">$row[9]</span>
+							<span class=\"cellNotes\">$row[7]</span>
 						</div>
 					</div>
 			";
 			
 			echo "<div class=\"contentCellBasic\" style=\"width: 35%;\">";
-				if($row[10]>0) {
+				if($row[9]>0) {
 					// get all jobs with the from the current company
 					$query_jobs = mysql_query($query['select_all_jobs_where_company_id'] . $row[0]. " " . $query['order_by_date'], $db_connection);
 					if($query_jobs) {
 						while ($jobRow = mysql_fetch_array($query_jobs, MYSQL_NUM)) {
-							/* $jobRow[0]=`JOB_ID`
-							 * $jobRow[1]=`company_id`,
-							 * $jobRow[2]=`position`,
-							 * $jobRow[3]=`link`,
-							 * $jobRow[4]=`notes`
+							/* $jobRow[0]=`jobID`
+							 * $jobRow[1]=`companyID`,
+							 * $jobRow[2]=`jobPosition`,
+							 * $jobRow[3]=`jobPositionURL`,
+							 * $jobRow[4]=`jobNotes`
 							 */
 							echo "
 								<div class=\"jobRow\">
@@ -114,18 +106,18 @@ if( $list = get('l') ) {
 						</span>
 					</div>
 					<div class=\"contentCellBasic\">";
-					if($list!=1) {
-						echo "<span class=\"button\" style=\"background: lightgrey\" onclick=\"moveData($row[0],".($list-1).")\"><<</span>";
+					if($listID!=1) {
+						echo "<span class=\"button\" style=\"background: lightgrey\" onclick=\"moveData($row[0],".($listID-1).")\"><<</span>";
 					}
-					if($list!=3) {
-						echo "<span class=\"button\" style=\"background: lightgrey\" onclick=\"moveData($row[0],".($list+1).")\">>></span>";
+					if($listID!=3) {
+						echo "<span class=\"button\" style=\"background: lightgrey\" onclick=\"moveData($row[0],".($listID+1).")\">>></span>";
 					}
 			echo "</div>
 					<p style=\"clear: both;\">
 				</div>";
 		}
 		
-		$query_companies = mysql_query($query['select_all_company_links'], $db_connection);
+		$query_companies = mysql_query($query['select_all_company_urls'], $db_connection);
 		
 		if($query_companies) {
 			echo "<script id=\"allLinks\">";

@@ -68,13 +68,12 @@ var switchStatusButtonText = function(txt, status, warning) {
 }
 
 var getList = function() {
-	return $('#theForm').find("[name='ltype']").val();
+	return $('#theForm').find("[name='listID']").val();
 }
 var getListType = function(x) {
-	var s = x.split(';')[1]; 
-	if( s == 'hl' ) return 'HOT LIST';
-	if( s == 'il' ) return 'INTERESTING LIST';
-	if( s == 'bl' ) return 'BLACK LIST';
+	if(!!x) {
+		return msg['l'+x.split(';')[1]];
+	}
 	return false;
 }
 
@@ -132,7 +131,7 @@ var initCheckField = function() {
 				for (i in companyList) {
 					var splitResult = companyList[i].split(';');
 					if( compareStrings(this.value,splitResult[0]) == 1 ) {
-						switchStatusButtonText( getComparableString(splitResult[0])+' '+msg['warning_msg_exist']+' '+splitResult[1]+'!' );
+						switchStatusButtonText( getComparableString(splitResult[0])+' '+msg['warning_msg_exist']+' '+getListType(splitResult[1])+'!' );
 						return false;
 					}
 					if(compareStrings(this.value,splitResult[0]) == 0 ) {
@@ -143,7 +142,7 @@ var initCheckField = function() {
 				};
 				switchStatusButtonText( msg['button_text_enter_company'] ,'active');
 				if(nameExist) {
-					switchStatusButtonText( msg['button_text_enter_company'] ,'active', tmpURL+" "+msg['warning_msg_similar_exist']+" "+tmpList+"!");
+					switchStatusButtonText( msg['button_text_enter_company'] ,'active', tmpURL+" "+msg['warning_msg_similar_exist']+" "+getListType(tmpList)+"!");
 				}
 				return false;
 			}
@@ -154,7 +153,7 @@ var initCheckField = function() {
 	$('#inputStatus').click(function(){
 		if( ! $(this).hasClass('pure-button-disabled') ) {
 			showCompanyForm( msg['button_text_add_company'] );
-			$("#clink").val( $("#urlInput").val() );
+			$("#companyURL").val( $("#urlInput").val() );
 		}
 		return false;
 	});
@@ -185,15 +184,16 @@ var loadList = function(list) {
 	resetWarningsAndErrors();
 	if(!!list) {
 		showLoader();
-		$('#theForm').find("[name='ltype']").val(list);
+		$('#theForm').find("[name='listID']").val(list);
 		$.ajax({
-			url: 'src/ljshFunc.php?a=f&l='+list,
+			url: 'src/ljshFunc.php?a=f&lid='+list,
 			dataType: 'html',
 			cache: false
 		}).done(function(data, textStatus, jqXHR) {
 			if(data!="") {
 				$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
 				$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
+				resetForm();
 			} else {
 				$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
 			}
@@ -215,7 +215,7 @@ var ajaxSubmit = function(formEl) {
 		var form = $(formEl);
 		var url  = form.attr('action'); // fetch where we want to submit the form to
 		var data = form.serializeArray(); // fetch the data for the form
-		var list = form.find("[name='ltype']").val();
+		var list = form.find("[name='listID']").val();
 		
 		// setup the ajax request
 		$.ajax({
@@ -247,11 +247,11 @@ var deleteData = function(cid, jid) {
 		showLoader();
 		var delete_url = 'src/ljshFunc.php?a=d';
 		if(jid==0) {
-			delete_url = delete_url+'&company_id='+cid+'&all=true'; // TODO: cid, jid
+			delete_url = delete_url+'&cid='+cid+'&all=true';
 		} else if(!!jid) {
-			delete_url = delete_url+'&company_id='+cid+'&job_id='+jid;
+			delete_url = delete_url+'&cid='+cid+'&jid='+jid;
 		} else {
-			delete_url = delete_url+'&company_id='+cid;
+			delete_url = delete_url+'&cid='+cid;
 		}
 		$.ajax({
 			url: delete_url,
@@ -319,9 +319,9 @@ var editJData = function(jid, el) {
 		var form = $('#theForm'), parentEL = $(el).closest(".jobRow");
 		form.find("[name='formAction']").val('jEdit');
 		form.find("[name='jobID']").val(jid);
-		form.find("[name='jposition']").val(parentEL.find('.cellPosition').text());
-		form.find("[name='jlink']").val(parentEL.find('a').attr('href'));
-		form.find("[name='jnotes']").val(parentEL.find('.cellJobNotes').text());
+		form.find("[name='jobPosition']").val(parentEL.find('.cellPosition').text());
+		form.find("[name='jobPositionURL']").val(parentEL.find('a').attr('href'));
+		form.find("[name='jobNotes']").val(parentEL.find('.cellJobNotes').text());
 		showJobForm( msg['button_text_edit_job'] );
 	}
 	return false;
@@ -335,14 +335,12 @@ var editCData = function(cid, el) {
 		form.find("[name='companyID']").val(cid);
 		form.find("[name='country']").val(parentEL.find(".cellCounty").text());
 		form.find("[name='city']").val(parentEL.find(".cellCity").text());
-		form.find("[name='cname']").val(parentEL.find(".cellCompany").text());
-		form.find("[name='clink']").val(parentEL.find(".cellCompanyLink").attr('href'));
-		form.find("[name='cinfos']").val(parentEL.find(".cellInfos").text());
-		form.find("[name='caddress']").val(parentEL.find(".cellAddress").text());
-		form.find("[name='caddress_link']").val(parentEL.find(".cellAddressLink").attr('href'));
-		form.find("[name='croute']").val(parentEL.find(".cellRoute").text());
-		form.find("[name='cratings']").val(parentEL.find(".cellRatings").text());
-		form.find("[name='cnotes']").val(parentEL.find(".cellNotes").text());
+		form.find("[name='companyName']").val(parentEL.find(".cellCompany").text());
+		form.find("[name='companyURL']").val(parentEL.find(".cellCompanyLink").attr('href'));
+		form.find("[name='companyAddress']").val(parentEL.find(".cellAddress").text());
+		form.find("[name='companyMapURL']").val(parentEL.find(".cellAddressLink").attr('href'));
+		form.find("[name='companyNotes']").val(parentEL.find(".cellNotes").text());
+		form.find("[name='companyRatings']").val(parentEL.find(".cellRatings").text());
 		showCompanyForm( msg['button_text_edit_company'] );
 	}
 	return false;

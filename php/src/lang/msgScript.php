@@ -15,6 +15,9 @@
 		print("msg['error_msg_submit_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_submit_failed'] . "\";");
 		print("msg['error_msg_move_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_move_failed'] . "\";");
 		print("msg['error_msg_delete_failed']=\"". $msg[ $_SESSION['lang'] ]['error_msg_delete_failed'] . "\";");
+		print("msg['l1']=\"". $msg[ $_SESSION['lang'] ]['l1'] . "\";");
+		print("msg['l2']=\"". $msg[ $_SESSION['lang'] ]['l2'] . "\";");
+		print("msg['l3']=\"". $msg[ $_SESSION['lang'] ]['l3'] . "\";");
 	print("</script>");
 	
 ?>

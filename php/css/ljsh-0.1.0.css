@@ -38,8 +38,11 @@ div.contentLayer {
 	background: none repeat scroll 0 0 #ababab;
 }
 /*
- * ******* CELLS *******
+ * ******* CELLS ******* 
  */
+
+/* TODO: refactorings: renaming cell names like tables */
+
 .contentCellBasic {
 	float:left; 
 	display: inline; 
