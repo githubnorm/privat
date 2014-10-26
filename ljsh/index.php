@@ -1,5 +1,9 @@
 ﻿<?php
-	include "src/lang/msgLib.php";
+	//session_start(); //stripslashes(),addslashes()
+	header('Content-Type: text/html; charset=utf-8');
+// 	include "src/lang/msgLib.php";
+	require_once('src/lang/msgLib.php');
+	define('MYCONSTANT',60*60*24);
 	$ip = $_SERVER['REMOTE_ADDR'];
 	$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
 	session_start();
@@ -18,7 +22,7 @@
 <head>
 	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>php testing <?php echo "[" . $_SERVER['SERVER_NAME'] . "]" ?></title>
+	<title>php testing <?php echo "[" . $_SERVER['SERVER_NAME'] . "] " . MYCONSTANT ?></title>
 	<link rel="stylesheet" type="text/css" href="css/ljsh-0.1.0.css">
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 <!-- 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css"> -->

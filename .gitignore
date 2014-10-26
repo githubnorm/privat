@@ -37,9 +37,14 @@ ehthumbs.db
 Thumbs.db
 
 # project files #
-######################
+#################
 .metadata
 RemoteSystemsTempFiles
 .settings
 .buildpath
 .project
+
+# ignored files #
+#################
+php/+webflips
++webflips
