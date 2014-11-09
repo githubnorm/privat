@@ -21,6 +21,16 @@
 		FROM jobs
 		WHERE `companyID`="; // --> generic value, please see delete.php
 
+	$query['select_check_if_logingID_exist'] = "
+		SELECT count(1)
+		FROM users
+		WHERE `loginID`="; // --> generic value, please see subscribe.php
+	
+	$query['select_check_if_logingID_is_activated'] = "
+		SELECT count(1)
+		FROM useractivations
+		WHERE `loginID`="; // --> generic value, please see subscribe.php
+	
 	$query['order_by_date'] = "ORDER BY `creationDate` DESC";
 	
 // 	$query['select_all_companies'] = "
@@ -52,6 +62,11 @@
 	$query['insert_job_values'] = "
 		INSERT INTO
 		`jobs`(`companyID`, `jobPosition`, `jobPositionURL`, `jobNotes`)";
+		// VALUES ('') --> generic, please see update.php
+		
+	$query['insert_useractivation_values'] = "
+		INSERT INTO
+		`useractivations`(`loginID`, `activationCode`)";
 		// VALUES ('') --> generic, please see update.php
 		
 	/* +++ +++ +++ END OF INSERTS +++ +++ +++ */

@@ -20,6 +20,8 @@
 		include "db/delete.php";
 	} else if(get('a')=="m") {
 		include "db/move.php";
+	} else if(get('a')=="r") {
+		include "db/subscribe.php";
 	} else {
 		include "db/update.php";
 	}

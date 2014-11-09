@@ -22,9 +22,12 @@
 		return $needle === "" || strpos($haystack, $needle) === 0;
 	}
 	
-	function toJSON($result) {
+	function toJSON($result, $msg) {
 		$resp = new stdClass();
 		$resp->success = false;
+		if($msg!=null && $msg!="") {
+			$resp->msg = $msg;
+		}
 		if($result) {
 			$resp->success = true;
 		}

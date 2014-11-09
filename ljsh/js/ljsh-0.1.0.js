@@ -352,8 +352,12 @@ var editCData = function(cid, el) {
  * ***************
  */
 $( document ).ready(function() {
-	resetForm();
-	loadList(['1']);
-	initListTabs();
-	initCheckField();
+	if(false) {
+		resetForm();
+		loadList(['1']);
+		initListTabs();
+		initCheckField();
+	} else {
+		//initCheckField();
+	}
 });

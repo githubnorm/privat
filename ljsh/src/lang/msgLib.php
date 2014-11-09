@@ -5,6 +5,9 @@
 	// http://wifimaku.com/online-marketing/einleitung-und-grundlagen/facts-%26-figures/internetnutzung/internetnutzung-weltweit#Internetnutzungweltweit-InternetnutzungnachWeltregionen
 	$msg = array( 
 		"en" => array( // 01 english (375 Mio./1500 Mio.) | (USA[G8] <02|2012:245,2Mio->2014:->279,82Mio>, UK[G8] <09|2012:52,72Mio->2014:->57,08Mio>, Canada[G8] <20|2012:?Mio->2014:33Mio>, Irland, Australia, NZ, Südafrika, Nigeria <08|2012:48,27Mio->2014:67,1Mio>)
+			"label_email" => "Email Address",
+			"label_password" => "Password",
+			"label_password_confirm" => "Password Confirmation",
 			"label_searchfield" => "Type or Paste the URL of the company in here",
 			"label_companyURL" => "Company URL",
 			"label_companyName" => "Company Name",
@@ -17,7 +20,9 @@
 			"label_jobPosition" => "Position Name",
 			"label_jobPositionURL" => "Job URL",
 			"label_jobNotes" => "Remarks",
-			"button_text_waiting" => "Waiting for Input..",
+			"button_text_login" => "Login",
+			"button_text_subscribe" => "Subscribe",
+			"button_text_waiting" => "Please type in URL..",
 			"button_text_invalid" => "URL is invalid!",
 			"button_text_enter_company" => "Enter New Company",
 			"button_text_add_company" => "Add New Company",
@@ -60,6 +65,9 @@
 			"label_searchfield" => "যুক্ত করুন অথবা এখানে কোম্পানী URL দিন"
 		),
 		"de" => array( // 10 german (105 Mio./185 Mio.) |(Germany[G8] <07|2012:67,48Mio->2014:71,72Mio>)
+			"label_email" => "Email Adresse",
+			"label_password" => "Passwort",
+			"label_password_confirm" => "Passwort bestätigen",
 			"label_searchfield" => "Füge oder gebe die Firmen URL hier ein",
 			"label_companyURL" => "URL des Unternehmens",
 			"label_companyName" => "Name des Unternehmens",
@@ -72,7 +80,9 @@
 			"label_jobPosition" => "Stellenname",
 			"label_jobPositionURL" => "Job URL",
 			"label_jobNotes" => "Bemerkungen",
-			"button_text_waiting" => "Warte auf Eingabe..",
+			"button_text_login" => "Anmelden",
+			"button_text_subscribe" => "Registrieren",
+			"button_text_waiting" => "Bitte gebe eine URL ein..",
 			"button_text_invalid" => "URL ist ungültig!",
 			"button_text_enter_company" => "Neues Unternehmen eingeben",
 			"button_text_add_company" => "Neues Unternehmen einfügen",
