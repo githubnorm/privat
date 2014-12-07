@@ -5,7 +5,12 @@
 
 /* loading */
 var resetWarningsAndErrors = function() {
-	$('#inputWarnings').text(''); $('#inputErrors').text('');
+	if($('#inputWarnings').length>0) {
+		$('#inputWarnings').text(''); 
+	}
+	if($('#inputErrors').length>0) {
+		$('#inputErrors').text('');
+	}
 	return false;
 }
 var hideLists = function() {
@@ -21,6 +26,24 @@ var showList = function(list) {
 	$("[data-target='"+list+"']").show();
 }
 /* form switching */
+var showLogin = function(bText) {
+	resetForm();
+	$('#subscribeButtons').hide();
+	$('#subscribeFields').hide();
+	$('#loginButtons').show();
+	$('#loginFields').show();
+	$('#theForm').find("[name='loginFormAction']").val('l');
+	//switchStatusButtonText(bText)
+}
+var showSubscribe = function(bText) {
+	resetForm();
+	$('#loginButtons').hide();
+	$('#loginFields').hide();
+	$('#subscribeButtons').show();
+	$('#subscribeFields').show();
+	$('#theForm').find("[name='loginFormAction']").val('s');
+	//switchStatusButtonText(bText)
+}
 var showSearchField = function(bText) {
 	$('#jobFields').hide();
 	$('#companyFields').hide();
@@ -119,44 +142,60 @@ var compareStrings = function(s1,s2) {
  */
 
 /* *** INITS *** */
-var initCheckField = function() {
+var initFields = function() {
 	resetWarningsAndErrors();
-	$("#urlInput").keyup(function() {
-		if(this.value.length==0) {
-			switchStatusButtonText( msg['button_text_waiting'] ); return false;
-		}
-		if(this.value.length>3) {
-			if( !!getComparableString(this.value) ) {
-				var hostExist = false, nameExist = false, tmpURL, tmpList;
-				for (i in companyList) {
-					var splitResult = companyList[i].split(';');
-					if( compareStrings(this.value,splitResult[0]) == 1 ) {
-						switchStatusButtonText( getComparableString(splitResult[0])+' '+msg['warning_msg_exist']+' '+getListType(splitResult[1])+'!' );
-						return false;
-					}
-					if(compareStrings(this.value,splitResult[0]) == 0 ) {
-						nameExist = true;
-						tmpURL  = getComparableString(splitResult[0]);
-						tmpList = splitResult[1];
-					}
-				};
-				switchStatusButtonText( msg['button_text_enter_company'] ,'active');
-				if(nameExist) {
-					switchStatusButtonText( msg['button_text_enter_company'] ,'active', tmpURL+" "+msg['warning_msg_similar_exist']+" "+getListType(tmpList)+"!");
-				}
-				return false;
+	if($("#urlInput").length>0) {
+		$("#urlInput").keyup(function() {
+			if(this.value.length==0) {
+				switchStatusButtonText( msg['button_text_waiting'] ); return false;
 			}
-		}
-		switchStatusButtonText( msg['button_text_invalid'] );
-		return false;
-	});
-	$('#inputStatus').click(function(){
-		if( ! $(this).hasClass('pure-button-disabled') ) {
-			showCompanyForm( msg['button_text_add_company'] );
-			$("#companyURL").val( $("#urlInput").val() );
-		}
-		return false;
-	});
+			if(this.value.length>3) {
+				if( !!getComparableString(this.value) ) {
+					var hostExist = false, nameExist = false, tmpURL, tmpList;
+					for (i in companyList) {
+						var splitResult = companyList[i].split(';');
+						if( compareStrings(this.value,splitResult[0]) == 1 ) {
+							switchStatusButtonText( getComparableString(splitResult[0])+' '+msg['warning_msg_exist']+' '+getListType(splitResult[1])+'!' );
+							return false;
+						}
+						if(compareStrings(this.value,splitResult[0]) == 0 ) {
+							nameExist = true;
+							tmpURL  = getComparableString(splitResult[0]);
+							tmpList = splitResult[1];
+						}
+					};
+					switchStatusButtonText( msg['button_text_enter_company'] ,'active');
+					if(nameExist) {
+						switchStatusButtonText( msg['button_text_enter_company'] ,'active', tmpURL+" "+msg['warning_msg_similar_exist']+" "+getListType(tmpList)+"!");
+					}
+					return false;
+				}
+			}
+			switchStatusButtonText( msg['button_text_invalid'] );
+			return false;
+		});
+	}
+	if($("#inputStatus").length>0) {
+		$('#inputStatus').click(function(){
+			if( ! $(this).hasClass('pure-button-disabled') ) {
+				showCompanyForm( msg['button_text_add_company'] );
+				$("#companyURL").val( $("#urlInput").val() );
+			}
+			return false;
+		});
+	}
+	if($("#signUpNow").length>0) {
+		$('#signUpNow').click(function(){
+			showSubscribe();
+			return false;
+		});
+	}
+	if($("#subscribeReset").length>0) {
+		$('#subscribeReset').click(function(){
+			showLogin();
+			return false;
+		});
+	}
 	return false;
 }
 
@@ -174,6 +213,8 @@ var resetForm = function() {
 	form.find("[name='formAction']").val('cAdd');
 	form.find("[name^='c']").val('');
 	form.find("[name^='j']").val('');
+	form.find("[name^='login']").val('');
+	form.find("[name^='subscribe']").val('');
 	showSearchField( msg['button_text_waiting'] );
 	return false;
 };
@@ -227,7 +268,9 @@ var ajaxSubmit = function(formEl) {
 			if(data.success) {
 				loadList(list);
 			} else {
-				$('#inputErrors').text( msg['error_msg_submit_failed'] );
+				$('#inputErrors').text( data.msg );
+				$('#inputErrors').show();
+				//$('#inputErrors').text( msg['error_msg_submit_failed'] );
 				showList(list);
 			}
 		}).fail(function() {
@@ -356,8 +399,8 @@ $( document ).ready(function() {
 		resetForm();
 		loadList(['1']);
 		initListTabs();
-		initCheckField();
+		initFields();
 	} else {
-		//initCheckField();
+		initFields();
 	}
 });

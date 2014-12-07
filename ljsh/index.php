@@ -1,5 +1,4 @@
 ﻿<?php
-
 	if(isset($_SESSION['user']) || $_SESSION['user']=='') {
 		header("Location: /privat/ljsh/login.php");
 	}

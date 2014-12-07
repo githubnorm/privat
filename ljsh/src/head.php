@@ -1,6 +1,6 @@
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>php testing <?php echo "[" . $_SERVER['SERVER_NAME'] . "] " . MYCONSTANT ?></title>
+<title>php testing <?php echo "[" . $_SERVER['SERVER_NAME'] . "] " ?></title>
 <link rel="stylesheet" type="text/css" href="css/ljsh-0.1.0.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 <!-- 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css"> -->

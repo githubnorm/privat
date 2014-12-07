@@ -1,32 +1,33 @@
 <?php
 
-	if( isPost('formAction') ) {
+	if( isPost('loginFormAction') ) {
 	
-		// let make sure we escape the data (for german umlauts)
-		$val['loginID'] = mysql_real_escape_string(getPost('loginID'), $db_connection);
-		$val['pw'] = mysql_real_escape_string(getPost('pw'), $db_connection);
-		$val['pw_confirm'] = mysql_real_escape_string(getPost('pw_confirm'), $db_connection);
-		
 		$msg = null;
 
 		// check login data
-		if( getPost('formAction')=="l" ) {
+		if( isPost('loginFormAction')=="l" ) {
+			
+			$val['loginID'] = mysql_real_escape_string(getPost('loginID'), $db_connection);
+			$val['loginPW'] = mysql_real_escape_string(getPost('loginPW'), $db_connection);
 			
 			$result=false;
-			$query_pw = mysql_query( $query['select_pw_where_logingID'] . $val['loginID'], $db_connection);
-			if($query_pw) {
-				while( $row = mysql_fetch_array($query_pw, MYSQL_NUM) ) {
-					if($row[0]==$val['pw']){
-						$_SESSION['user'] = $val['loginID'];
-						$result = true;
-					} else {
-						$msg = "password doesn't match to the user";
-						$result = true;
+			$query_exist = mysql_query( $query['select_check_if_logingID_exist'] . "'" . $val['loginID'] . "'", $db_connection);
+			if($query_exist) {
+				$query_pw = mysql_query( $query['select_pw_where_logingID'] . $val['loginID'], $db_connection);
+				if($query_pw) {
+					while( $row = mysql_fetch_array($query_pw, MYSQL_NUM) ) {
+						if($row[0]==$val['loginPW']){
+							$_SESSION['user'] = $val['loginID'];
+							$result = true;
+						} else {
+							$msg = "password doesn't match to the user";
+							$result = false;
+						}
 					}
 				}
 			} else {
-				if($quey_pw==0) {
-					$msg = "user not found!";
+				if($query_exist==0) {
+					$msg = "user not found! please sign up!";
 					$exist = mysql_query( $query['select_check_if_logingID_is_activated'] . $val['loginID'], $db_connection);
 					if($exist==1) {
 						$msg = "user hasn't activate his account!";
@@ -38,15 +39,19 @@
 		}
 		
 		// insertion of new activation
-		if( getPost('formAction')=="r" ) {
+		if( isPost('loginFormAction')=="s" ) {
 			
-			$exist = mysql_query( $query['select_check_if_logingID_exist'] . $val['loginID'], $db_connection);
+			$val['subscribeID'] = mysql_real_escape_string(getPost('subscribeID'), $db_connection);
+			$val['subscribePW'] = mysql_real_escape_string(getPost('subscribePW'), $db_connection);
+			$val['subscribePWconfirm'] = mysql_real_escape_string(getPost('subscribePWconfirm'), $db_connection);
 			
-			if($exist==0) {
+			$result = mysql_query( $query['select_check_if_logingID_exist'] . "'" . $val['subscribeID'] . "'", $db_connection);
+			$data = mysql_fetch_assoc($result);
+			if($data['exist']==0) {
 
-				$exist = mysql_query( $query['select_check_if_logingID_is_activated'] . $val['loginID'], $db_connection);
-				
-				if($exist==0) {
+				$result = mysql_query( $query['select_check_if_logingID_is_activated'] . "'" . $val['subscribeID'] . "'", $db_connection);
+				$data = mysql_fetch_assoc($result);
+				if($data['exist']==0) {
 					
 					// Mail senden, ggf. Fehlermeldung ausgeben. Bei erfolgreicher Registrierung den
 					// Benutzer fuer weitere Registrierungen temporaer sperren
@@ -59,7 +64,7 @@
 							$activationCode =  mt_rand(0,1000) . date('U') . mt_rand(0,1000);
 							// `useractivations`(`loginID`, `activationCode`)
 							$query_tmp =  $query['insert_useractivation_values']."
-							VALUES ('".$val['loginID']."',
+							VALUES ('".$val['subscribeID']."',
 								'".$activationCode."')";
 							// insert/update the company in db
 							$result = mysql_query($query_tmp, $db_connection);

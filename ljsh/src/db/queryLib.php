@@ -22,19 +22,24 @@
 		WHERE `companyID`="; // --> generic value, please see delete.php
 
 	$query['select_check_if_logingID_exist'] = "
-		SELECT count(1)
+		SELECT count(1) as exist
 		FROM users
 		WHERE `loginID`="; // --> generic value, please see subscribe.php
 	
+	$query['select_pw_where_logingID'] = "
+		SELECT userspws.pw
+		FROM userspws, users
+		WHERE userspws.pwID=users.pwID AND users.loginID ="; // --> generic value, please see subscribe.php
+	
 	$query['select_check_if_logingID_is_activated'] = "
-		SELECT count(1)
+		SELECT count(1) as exist
 		FROM useractivations
-		WHERE `loginID`="; // --> generic value, please see subscribe.php
+		WHERE `activationID`="; // --> generic value, please see subscribe.php
 	
 	$query['order_by_date'] = "ORDER BY `creationDate` DESC";
 	
 // 	$query['select_all_companies'] = "
-// 		SELECT `companyID`, `country`, `city`, `companyName`, `companyURL`, `companyAddress`, `companyMapURL`, `companyNotes`, `companyRatings`, `jobCount`, `listID`, `userID`, `creationDate` 
+// 		SELECT `companyID`, `country`, `city`, `companyName`, `companyURL`, `companyAddress`, `companyMapURL`, `companyNotes`, `companyRatings`, `jobCount`, `listID`, `loginID`, `creationDate` 
 // 		FROM companies ";
 
 // 	$query['select_companies_where_jobs'] = "
