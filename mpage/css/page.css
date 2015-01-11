@@ -1,0 +1,217 @@
+/* ************* ************* COMMON ************* ************* */
+
+body {
+	color: #333;
+	margin: 0;
+}
+
+.wrapper {
+	text-align: center;
+	padding: 20px;
+}
+
+.header {
+	width: 750px;
+	margin: 10px auto;
+}
+
+.header_title {
+	border-bottom: solid 1px #333;
+	display: block;
+	position: relative;
+}
+.header_title a{
+	font-family: 'Playball', cursive;
+	font-size: 30px;	
+/* 	text-shadow: 1px 1px 1px #666; */
+	text-shadow: 1px 1px 2px #555;
+}
+.header_title a:hover {
+/* 	text-shadow: 1px 1px 2px #555; */
+}
+.header_title a:link, 
+.header_title a:visited,
+.header_title a:focus,
+.header_title a:hover,
+.header_title a:active {
+	color: #333;
+	text-decoration:none;
+}
+
+.header_menu {
+	margin: 3px;
+	display: block;
+	position: relative;
+}
+.header_menu a{
+	font-family: verdana;
+	padding: 3px;
+	margin: 3px;
+}
+.header_menu a:link, 
+.header_menu a:visited,
+.header_menu a:focus,
+.header_menu a:hover,
+.header_menu a:active {
+	color: #333;
+	text-decoration:none;
+}
+.header_link_active {
+	font-weight: bold; 
+}
+
+.main {
+	width: 750px;
+	margin: 10px auto;
+}
+
+.main_start {
+	border: 0;
+	cursor: url(../img/brush.png), auto;
+}
+
+.footer {
+	width: 750px;
+	margin: 30px auto;
+	text-align: center;
+}
+.footer a:link, 
+.footer a:visited,
+.footer a:focus,
+.footer a:hover,
+.footer a:active {
+	color: #333;
+	text-decoration:none;
+}
+
+.footer_imp {
+	border-top: solid 1px #333;
+	font-family: verdana;
+	font-size: 11px;
+}
+
+/* ************* ************* VITA ************* ************* */
+
+.vita_list {
+	list-style-type:none;
+	width: 600px; 
+	margin: 30px auto;
+	text-align:left;
+	font-family: arial;
+	font-size: 15px; 
+}
+.vita_list_row {
+	margin: 2px 0;
+	padding: 5px 0;
+	clear: both;
+}
+/* .vita_list_row {
+	background-color: #f7f7f7;
+} */
+/* .vita_list_row:nth-child(odd) {
+	background-color: #ebebeb;
+}
+.vita_list_row:nth-child(even) {
+	background-color: #f7f7f7;
+} */
+
+.vita_list_cell_left {
+	display: block;
+	float: left; 
+	text-align: right; 
+	width: 80px;
+	font-weight:bold;
+}
+.vita_list_cell_right {
+	/* display: block; */
+	float: left; 
+	margin-left: 20px;
+	width: 500px;
+}
+.vita_list_cell_headline {
+	display: block;
+	float: left; 
+	text-align: right; 
+	font-weight:bold;
+}
+
+/* ************* ************* GALLERY ************* ************* */
+
+.gallery_pictures {
+
+}
+.gallery_img {
+/* 	border: 15px solid white; */
+	z-index: 1;
+}
+.gallery_layer {
+	background-color: transparent;
+	z-index: 2;
+	opacity: 0.0;
+}
+.gallery_img_titel {
+	font-family: verdana;
+	font-size: 11px;
+	display: inline;
+	position: relative;
+	top: 15px;
+}
+.button_back, .button_next {
+	margin-top: 5px;
+	width: 0;
+  	height: 0;
+	cursor: pointer;
+}
+.button_back {
+	float: left;
+	margin-left: 10px;
+  	border-top: 15px solid transparent;
+  	border-right: 25px solid #666;
+  	border-bottom: 15px solid transparent;
+}
+.button_back:hover {
+	border-right: 25px solid #000;
+}
+.button_next {
+	float: right;
+	margin-right: 10px;
+  	border-top: 15px solid transparent;
+  	border-left: 25px solid #666;
+  	border-bottom: 15px solid transparent;
+}
+.button_next:hover {
+	border-left: 25px solid #000;
+}
+
+/* ************* ************* CONTACT ************* ************* */
+
+.contact_content {
+	width: 600px; 
+	margin: 40px auto;
+	text-align:left;
+	font-family: arial;
+	font-size: 15px; 
+}
+.contact_para {
+	margin: 40px 0;
+}
+
+.contact_links{
+	background-color: #efefef;
+	padding: 10px;
+	margin-left: 10px;
+}
+
+.contact_links a{
+	font-family: verdana;
+	padding: 3px;
+	margin: 3px;
+}
+.contact_links a:link, 
+.contact_links a:visited,
+.contact_links a:focus,
+.contact_links a:hover,
+.contact_links a:active {
+	color: #333;
+	text-decoration:none;
+}
