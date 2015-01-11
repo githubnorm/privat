@@ -1,0 +1,406 @@
+/* 
+ * util functions
+ * **************
+ */
+
+/* loading */
+var resetWarningsAndErrors = function() {
+	if($('#inputWarnings').length>0) {
+		$('#inputWarnings').text(''); 
+	}
+	if($('#inputErrors').length>0) {
+		$('#inputErrors').text('');
+	}
+	return false;
+}
+var hideLists = function() {
+	$("[data-target]").hide();
+	return false;
+}
+var showLoader = function() {
+	hideLists();
+	$('#loader').show();
+}
+var showList = function(list) {
+	$('#loader').hide();
+	$("[data-target='"+list+"']").show();
+}
+/* form switching */
+var showLogin = function(bText) {
+	resetForm();
+	$('#subscribeButtons').hide();
+	$('#subscribeFields').hide();
+	$('#loginButtons').show();
+	$('#loginFields').show();
+	$('#theForm').find("[name='loginFormAction']").val('l');
+	//switchStatusButtonText(bText)
+}
+var showSubscribe = function(bText) {
+	resetForm();
+	$('#loginButtons').hide();
+	$('#loginFields').hide();
+	$('#subscribeButtons').show();
+	$('#subscribeFields').show();
+	$('#theForm').find("[name='loginFormAction']").val('s');
+	//switchStatusButtonText(bText)
+}
+var showSearchField = function(bText) {
+	$('#jobFields').hide();
+	$('#companyFields').hide();
+	$('#formButtons').hide();
+	$('#startButton').show();
+	$('#searchField').show();
+	$("#urlInput").val('');
+	$("#urlInput").attr('autocomplete', 'off');
+	switchStatusButtonText(bText)
+}
+var showCompanyForm = function(bText) {
+	$('#jobFields').hide();
+	$('#startButton').hide();
+	$('#searchField').hide();
+	$('#formButtons').show();
+	$('#companyFields').show();
+	switchFormButtonText(bText);
+}
+var showJobForm = function(bText) {
+	$('#companyFields').hide();
+	$('#startButton').hide();
+	$('#searchField').hide();
+	$('#formButtons').show();
+	$('#jobFields').show();
+	switchFormButtonText(bText);
+}
+var switchFormButtonText = function(txt) {
+	$('#formSubmit').text(txt);
+}
+var switchStatusButtonText = function(txt, status, warning) {
+	var el = $('#inputStatus'), warn = $('#inputWarnings');
+	if(!status) {
+		el.removeClass().addClass("pure-button-disabled pure-button");
+	}
+	if(!warning) {
+		warn.text(' ');
+	}
+	if(!!status && status == 'active') {
+		el.removeClass().addClass("pure-button button-success");
+	}
+	if(!!warning && warning!='' ) {
+		warn.text(warning);
+	}
+	el.text(txt);
+}
+
+var getList = function() {
+	return $('#theForm').find("[name='listID']").val();
+}
+var getListType = function(x) {
+	if(!!x) {
+		return msg['l'+x.split(';')[1]];
+	}
+	return false;
+}
+
+var getComparableString = function(s) {
+	if( s.indexOf('//') != -1 && s.split('//')[1] != "") {
+		s = s.split('//')[1].split('/')[0];
+		if( s.indexOf('.') != -1 ) {
+			s = s.split('.');
+			if( s[s.length-1].length > 1 ) {
+				return s[s.length-2] + '.' + s[s.length-1];
+			}
+		}
+	} else {
+		s = s.split('/')[0];
+		if( s.indexOf('.') != -1 ) {
+			s = s.split('.');
+			if( s[s.length-1].length > 1 ) {
+				return s[s.length-2] + '.' + s[s.length-1];
+			}
+		}
+	}
+	return false;
+}
+var compareStrings = function(s1,s2) {
+	var c1 = getComparableString(s1);
+	var c2 = getComparableString(s2);
+	if(c1==c2) {
+		return 1;
+	}
+	if( (!!c1 && !!c2) 
+			&& ( c1.split('.')[1] != c2.split('.')[1] ) 
+			&& ( c1.split('.')[0] == c2.split('.')[0] ) 
+		) {
+		return 0;
+	}
+	return -1;
+}
+
+
+/*
+ * main functions
+ * **************
+ */
+
+/* *** INITS *** */
+var initFields = function() {
+	resetWarningsAndErrors();
+	if($("#urlInput").length>0) {
+		$("#urlInput").keyup(function() {
+			if(this.value.length==0) {
+				switchStatusButtonText( msg['button_text_waiting'] ); return false;
+			}
+			if(this.value.length>3) {
+				if( !!getComparableString(this.value) ) {
+					var hostExist = false, nameExist = false, tmpURL, tmpList;
+					for (i in companyList) {
+						var splitResult = companyList[i].split(';');
+						if( compareStrings(this.value,splitResult[0]) == 1 ) {
+							switchStatusButtonText( getComparableString(splitResult[0])+' '+msg['warning_msg_exist']+' '+getListType(splitResult[1])+'!' );
+							return false;
+						}
+						if(compareStrings(this.value,splitResult[0]) == 0 ) {
+							nameExist = true;
+							tmpURL  = getComparableString(splitResult[0]);
+							tmpList = splitResult[1];
+						}
+					};
+					switchStatusButtonText( msg['button_text_enter_company'] ,'active');
+					if(nameExist) {
+						switchStatusButtonText( msg['button_text_enter_company'] ,'active', tmpURL+" "+msg['warning_msg_similar_exist']+" "+getListType(tmpList)+"!");
+					}
+					return false;
+				}
+			}
+			switchStatusButtonText( msg['button_text_invalid'] );
+			return false;
+		});
+	}
+	if($("#inputStatus").length>0) {
+		$('#inputStatus').click(function(){
+			if( ! $(this).hasClass('pure-button-disabled') ) {
+				showCompanyForm( msg['button_text_add_company'] );
+				$("#companyURL").val( $("#urlInput").val() );
+			}
+			return false;
+		});
+	}
+	if($("#signUpNow").length>0) {
+		$('#signUpNow').click(function(){
+			showSubscribe();
+			return false;
+		});
+	}
+	if($("#subscribeReset").length>0) {
+		$('#subscribeReset').click(function(){
+			showLogin();
+			return false;
+		});
+	}
+	return false;
+}
+
+var initListTabs = function() {
+	resetWarningsAndErrors();
+	$("[data-list]").click(function(){
+		loadList($(this).attr('data-list'));
+	});
+	return false;
+}
+
+var resetForm = function() {
+	resetWarningsAndErrors();
+	var form = $('#theForm');
+	form.find("[name='formAction']").val('cAdd');
+	form.find("[name^='c']").val('');
+	form.find("[name^='j']").val('');
+	form.find("[name^='login']").val('');
+	form.find("[name^='subscribe']").val('');
+	showSearchField( msg['button_text_waiting'] );
+	return false;
+};
+/* *** INITS *** */
+
+/* *** AJAXS *** */
+var loadList = function(list) {
+	resetWarningsAndErrors();
+	if(!!list) {
+		showLoader();
+		$('#theForm').find("[name='listID']").val(list);
+		$.ajax({
+			url: 'src/ljshFunc.php?a=f&lid='+list,
+			dataType: 'html',
+			cache: false
+		}).done(function(data, textStatus, jqXHR) {
+			if(data!="") {
+				$("[data-target='"+list+"']").html( data.substring(0,data.indexOf('<script')) );
+				$('#allLinks').replaceWith( data.substring(data.indexOf('<script'), data.indexOf('</script>')+'</script>'.length) );
+				resetForm();
+			} else {
+				$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+			}
+		}).fail(function() {
+			$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+		}).always(function() {
+			showList(list);
+		});
+	} else {
+		$("[data-target='"+list+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_fetch_failed']+"</div>");
+	}
+	return false;
+}
+
+var ajaxSubmit = function(formEl) {
+	resetWarningsAndErrors();
+	if(!!formEl) {
+		showLoader();
+		var form = $(formEl);
+		var url  = form.attr('action'); // fetch where we want to submit the form to
+		var data = form.serializeArray(); // fetch the data for the form
+		var list = form.find("[name='listID']").val();
+		
+		// setup the ajax request
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			dataType: 'json'
+		}).done(function(data, textStatus, jqXHR) {
+			if(data.success) {
+				loadList(list);
+			} else {
+				$('#inputErrors').text( data.msg );
+				$('#inputErrors').show();
+				//$('#inputErrors').text( msg['error_msg_submit_failed'] );
+				showList(list);
+			}
+		}).fail(function() {
+			$('#inputErrors').text( msg['error_msg_submit_failed'] );
+			showList(list);
+		});
+	} else {
+		$('#inputErrors').text( msg['error_msg_submit_failed'] );
+	}
+	// return false so the form does not actually submit to the page
+	return false;
+}
+
+var deleteData = function(cid, jid) {
+	resetWarningsAndErrors();
+	if(!!cid) {
+		showLoader();
+		var delete_url = 'src/ljshFunc.php?a=d';
+		if(jid==0) {
+			delete_url = delete_url+'&cid='+cid+'&all=true';
+		} else if(!!jid) {
+			delete_url = delete_url+'&cid='+cid+'&jid='+jid;
+		} else {
+			delete_url = delete_url+'&cid='+cid;
+		}
+		$.ajax({
+			url: delete_url,
+			dataType: 'json'
+		}).done(function(data, textStatus, jqXHR) {
+			if(data.success) {
+				loadList(getList());
+			} else {
+				$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
+				showList(getList());
+			}
+		}).fail(function() {
+			$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
+			showList(getList());
+		})
+	} else {
+		$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_delete_failed']+"</div>");
+	}
+	return false;
+};
+
+var moveData = function(cid, lid) {
+	resetWarningsAndErrors();
+	if(!!cid && !!lid) {
+		showLoader();
+		var move_url = 'src/ljshFunc.php?a=m&cid='+cid+'&lid='+lid;
+		$.ajax({
+			url: move_url,
+			dataType: 'json'
+		}).done(function(data, textStatus, jqXHR) {
+			if(data.success) {
+				loadList(getList());
+			} else {
+				$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_move_failed']+"</div>");
+				showList(getList());
+			}
+		}).fail(function() {
+			$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_move_failed']+"</div>");
+			showList(getList());
+		})
+	} else {
+		$("[data-target='"+getList()+"']").html("<div style=\"padding: 40px 0; text-align:center\">"+msg['error_msg_move_failed']+"</div>");
+	}
+	return false;
+};
+/* *** AJAXS *** */
+
+/* *** FORM UI *** */
+var addJData = function(cid) {
+	resetWarningsAndErrors();
+	if(!!cid) {
+		resetForm();
+		var form = $('#theForm');
+		form.find("[name='formAction']").val('jAdd');
+		form.find("[name='companyID']").val(cid);
+		showJobForm( msg['button_text_add_job'] );
+	}
+	return false;
+};
+
+var editJData = function(jid, el) {
+	resetWarningsAndErrors();
+	if(!!jid && !!el) {
+		resetForm();
+		var form = $('#theForm'), parentEL = $(el).closest(".jobRow");
+		form.find("[name='formAction']").val('jEdit');
+		form.find("[name='jobID']").val(jid);
+		form.find("[name='jobPosition']").val(parentEL.find('.cellPosition').text());
+		form.find("[name='jobPositionURL']").val(parentEL.find('a').attr('href'));
+		form.find("[name='jobNotes']").val(parentEL.find('.cellJobNotes').text());
+		showJobForm( msg['button_text_edit_job'] );
+	}
+	return false;
+};
+
+var editCData = function(cid, el) {
+	resetWarningsAndErrors();
+	if(!!cid && !!el) {
+		var form = $('#theForm'), parentEL = $(el).closest(".listLayer");
+		form.find("[name='formAction']").val('cEdit');
+		form.find("[name='companyID']").val(cid);
+		form.find("[name='country']").val(parentEL.find(".cellCounty").text());
+		form.find("[name='city']").val(parentEL.find(".cellCity").text());
+		form.find("[name='companyName']").val(parentEL.find(".cellCompany").text());
+		form.find("[name='companyURL']").val(parentEL.find(".cellCompanyLink").attr('href'));
+		form.find("[name='companyAddress']").val(parentEL.find(".cellAddress").text());
+		form.find("[name='companyMapURL']").val(parentEL.find(".cellAddressLink").attr('href'));
+		form.find("[name='companyNotes']").val(parentEL.find(".cellNotes").text());
+		form.find("[name='companyRatings']").val(parentEL.find(".cellRatings").text());
+		showCompanyForm( msg['button_text_edit_company'] );
+	}
+	return false;
+};
+/* *** FORM UI *** */
+
+/*
+ * onload function
+ * ***************
+ */
+$( document ).ready(function() {
+	if(false) {
+		resetForm();
+		loadList(['1']);
+		initListTabs();
+		initFields();
+	} else {
+		initFields();
+	}
+});
